@@ -127,7 +127,7 @@ def loop():
             cap.release()
         cv2.destroyAllWindows()
 
-        window.after(500, loop)
+        #window.after(500, loop)
     
 def lists():
     global c
@@ -263,5 +263,6 @@ lblError.grid_forget()
 
 setup()
 #enterScreen1()
-window.after(500, loop)
+#window.after(500, loop)
+loop()
 window.mainloop()
