@@ -1,8 +1,8 @@
 import RPi.GPIO as GPIO
 import time
 
-aux_vcc = 16
-signal = 18
+aux_vcc = 23
+signal = 24
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
