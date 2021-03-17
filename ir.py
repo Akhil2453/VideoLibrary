@@ -12,7 +12,9 @@ GPIO.output(aux_vcc, GPIO.HIGH)
 
 while True:
 	a = GPIO.input(signal)
-	if (a == False):
+	print("status of a: ")
+        print(a)
+        if (a == False):
 		print("Sensor is Working")
 	else:
 		print("Sensor is not working")
