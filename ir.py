@@ -6,7 +6,7 @@ signal = 24
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(signal, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(signal, GPIO.IN) #, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(aux_vcc, GPIO.OUT)
 GPIO.output(aux_vcc, GPIO.HIGH)
 
