@@ -3,6 +3,7 @@ import time
 
 aux_vcc = 23
 signal = 24
+a = 1
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
