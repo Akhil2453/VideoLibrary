@@ -30,7 +30,7 @@ bgButton="#81d3f9"
 phone.set("")
 
 #GPIO pins
-button = 18
+signal = 18
 
 #Database
 connection = pymongo.MongoClient('mongodb+srv://Dikshitha:Dikshitha29@cluster1.xya37.mongodb.net/CigaretteBud?retryWrites=true&w=majority')
@@ -49,8 +49,9 @@ def clear():
     phone.set("")
 
 def setup():
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(signal, GPIO.IN) #, pull_up_down=GPIO.PUD_UP)
 
 def endprogram():
     GPIO.cleanup()
@@ -65,7 +66,7 @@ def loop():
     global count
     global cnt
     global files
-    a = GPIO.input(button)
+    a = GPIO.input(signal)
     for i in files:
         cap = cv2.VideoCapture(i)
         player = MediaPlayer(i)
