@@ -78,6 +78,7 @@ def loop():
                 audio_frame, val = player.get_frame()
                 
                 if ret == True:
+                    a = GPIO.input(signal)
                     scale_width = width/frame.shape[1]
                     scale_height = height/frame.shape[0]
                     window_width = int(frame.shape[1]*scale_width)
