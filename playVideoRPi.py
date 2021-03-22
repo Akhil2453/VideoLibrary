@@ -145,6 +145,8 @@ def loop():
                         a = True
                         cap.release()
                         cv2.destroyAllWindows()
+                        window.update()
+                        window.deiconify()
                         raise_frame(screen2)
                         time.sleep(0.2)
                         print("Button Pressed")
