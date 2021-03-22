@@ -25,6 +25,7 @@ width = window.winfo_screenwidth()-50
 height = window.winfo_screenheight()-50
 window.geometry(str(width)+"x"+str(height))
 phone.set("")
+ret = False
 
 #GPIO pins
 signal = 18
@@ -42,6 +43,7 @@ def number_e():
     global number
     global count
     global cnt
+    global ret
     num = number.get()
     number.set(num)
     pushCnt = str(cnt)
@@ -57,7 +59,7 @@ def number_e():
     raise_frame(PageTwo)
     window.update()
     time.sleep(5)
-    raise_frame(welcome)
+    ret=True
     window.update()
 
 def exit():
@@ -76,7 +78,7 @@ def exit():
     raise_frame(PageTwo)
     window.update()
     time.sleep(5)
-    raise_frame(welcome)
+    ret=True
     window.update()
 
 
@@ -139,8 +141,7 @@ def loop():
                         a = True
                         cap.release()
                         cv2.destroyAllWindows()
-                        window.update()
-                        window.deiconify()
+                        raise_frame(screen2)
                         time.sleep(0.2)
                         print("Button Pressed")
                         cnt = cnt + 1
