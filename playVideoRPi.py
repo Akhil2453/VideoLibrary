@@ -2,12 +2,13 @@
 import cv2 
 import numpy as np
 from tkinter import *
-import pymongo
+#import pymongo
 from pytube import YouTube
 import os
 import RPi.GPIO as GPIO
 import time
 from ffpyplayer.player import *
+import requests
 
 #----------------------------container window----------------------------
 window = Tk()
@@ -33,9 +34,13 @@ phone.set("")
 signal = 18
 
 #Database
-connection = pymongo.MongoClient('mongodb+srv://Dikshitha:Dikshitha29@cluster1.xya37.mongodb.net/CigaretteBud?retryWrites=true&w=majority')
-db = connection['CigaretteBud']
-collection = db['videoLinks']
+#connection = pymongo.MongoClient('mongodb+srv://Dikshitha:Dikshitha29@cluster1.xya37.mongodb.net/CigaretteBud?retryWrites=true&w=majority')
+#db = connection['CigaretteBud']
+#collection = db['videoLinks']
+
+#Api
+parameters = {'action':'viewsvideos','MCID':'002000311'}
+response = requests.get("http://clickcash.in/videoApi/videoApi.php", params=parameters)
 
 #---------------------------------methods-----------------------------------
 def enterNum(digit):
@@ -135,22 +140,27 @@ def lists():
     global collection
     global files
     num=0
+    videoList = []
+    videosApi = response.json()['schemes']
+    for video in videosApi:
+        link = video['video']
+        videoList.append(link)
     files = os.listdir("/home/pi/Desktop/video")
     print(len(files))
-    for x in collection.find():
+    for x in videoList:
         num=num+1
     print(num)
     print(len(videos))
-    if(len(files)-2)==num:
+    if(len(files)-5)==num:
         print('No downloading...')
         c=num
     else:
-        for item in collection.find():
-            if item.get('link',"") in videos:
+        for item in videoList:
+            if item in videos:
                 print ('Already exists')
-                videos.remove(item.get('link',''))
+                videos.remove(item)
             else:
-                videos.insert(0,item.get('link',""))
+                videos.insert(0,item)
         print(videos)
         for link in videos:
             print (link)
