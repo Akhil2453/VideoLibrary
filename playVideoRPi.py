@@ -30,6 +30,9 @@ phone.set("")
 signal = 18
 
 
+def raise_frame(frame):
+    frame.tkraise()
+
 #Api
 parameters = {'action':'viewsvideos','MCID':'002000311'}
 response = requests.get("http://clickcash.in/videoApi/videoApi.php", params=parameters)
@@ -52,10 +55,10 @@ def number_e():
     cnt = 0
     count.set(num)
     raise_frame(PageTwo)
-    root.update()
+    window.update()
     time.sleep(5)
     raise_frame(welcome)
-    root.update()
+    window.update()
 
 def exit():
     global number
@@ -71,10 +74,10 @@ def exit():
     cnt = 0
     count.set(num)
     raise_frame(PageTwo)
-    root.update()
+    window.update()
     time.sleep(5)
     raise_frame(welcome)
-    root.update()
+    window.update()
 
 
 def enterNum(digit):
@@ -146,7 +149,7 @@ def loop():
                         audio_frame = None
                         val = None
                         enterScreen1()
-                        root.after(30000, exit)
+                        window.after(30000, exit)
                         return
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
