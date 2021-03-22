@@ -87,6 +87,12 @@ def delete():
 def clear():
     phone.set("")
 
+def cancel():
+    global cnt
+    raise_frame(welcome)
+    cnt = 0
+    e.delete(0, END)
+
 def setup():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BOARD)
@@ -238,18 +244,18 @@ Label(screen2, textvariable=count, font=myfont).place(x=585, y=125) #grid(row=1,
 Label(screen2, text="\n", font=myfont).grid(row=1, column = 3, padx=(0,0), pady=0)
 e = Entry(screen2, textvariable=phone, width=20, font=myfont)
 e.grid(columnspan=3, row=2, column=0, padx=(200,1), pady=15)
-Button(screen2, text='1', command=lambda:num_get(1), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=0, padx=(200,10), pady=(15,0))
-Button(screen2, text='2', command=lambda:num_get(2), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=1, padx=(0,10), pady=(15,0))
-Button(screen2, text='3', command=lambda:num_get(3), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=2, padx=(0,10), pady=(15,0))
-Button(screen2, text='4', command=lambda:num_get(4), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=0, padx=(200,10), pady=(10,0))
-Button(screen2, text='5', command=lambda:num_get(5), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=1, padx=(0,10), pady=(10,0))
-Button(screen2, text='6', command=lambda:num_get(6), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=2, padx=(0,10), pady=(10,0))
-Button(screen2, text='7', command=lambda:num_get(7), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=0, padx=(200,10), pady=(10,0))
-Button(screen2, text='8', command=lambda:num_get(8), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=1, padx=(0,10), pady=(10,0))
-Button(screen2, text='9', command=lambda:num_get(9), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=2, padx=(0,10), pady=(10,0))
-Button(screen2, text='0', command=lambda:num_get(0), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=1, padx=(0,10), pady=(10,0))
-Button(screen2, text='Delete', command=delt, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=2, padx=(0,10), pady=(10,0))
-Button(screen2, text='Clear', command=clr, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=0, padx=(200,10), pady=(10,0))
+Button(screen2, text='1', command=lambda:enterNum(1), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=0, padx=(200,10), pady=(15,0))
+Button(screen2, text='2', command=lambda:enterNum(2), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=1, padx=(0,10), pady=(15,0))
+Button(screen2, text='3', command=lambda:enterNum(3), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=2, padx=(0,10), pady=(15,0))
+Button(screen2, text='4', command=lambda:enterNum(4), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=0, padx=(200,10), pady=(10,0))
+Button(screen2, text='5', command=lambda:enterNum(5), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=1, padx=(0,10), pady=(10,0))
+Button(screen2, text='6', command=lambda:enterNum(6), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=2, padx=(0,10), pady=(10,0))
+Button(screen2, text='7', command=lambda:enterNum(7), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=0, padx=(200,10), pady=(10,0))
+Button(screen2, text='8', command=lambda:enterNum(8), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=1, padx=(0,10), pady=(10,0))
+Button(screen2, text='9', command=lambda:enterNum(9), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=2, padx=(0,10), pady=(10,0))
+Button(screen2, text='0', command=lambda:enterNum(0), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=1, padx=(0,10), pady=(10,0))
+Button(screen2, text='Delete', command=delete, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=2, padx=(0,10), pady=(10,0))
+Button(screen2, text='Clear', command=clear, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=0, padx=(200,10), pady=(10,0))
 Button(screen2, text='Enter', bg='#0052cc', fg='#ffffff', command=number_e, borderwidth=5, relief=RAISED, height=1, width=22, font=nfont).grid(row=7, column=0, columnspan=2,padx=(200,10), pady=(10,0))
 Button(screen2, text='Cancel', command=cancel, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=7, column=2, padx=(0,10), pady=(10,0))
 
