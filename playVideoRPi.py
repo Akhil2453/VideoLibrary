@@ -56,10 +56,12 @@ def number_e():
     phone.set(num)
     cnt = 0
     count.set(num)
-    raise_frame(PageTwo)
+    scree2.grid_forget()
+    PageTwo.grid(Label)
     window.update()
     time.sleep(5)
-    ret=True
+    PageTwo.grid_forget()
+    loop()
     window.update()
 
 def exit():
@@ -75,10 +77,12 @@ def exit():
     phone.set(num)
     cnt = 0
     count.set(num)
-    raise_frame(PageTwo)
+    scree2.grid_forget()
+    PageTwo.grid(Label)
     window.update()
     time.sleep(5)
-    ret=True
+    PageTwo.grid_forget()
+    loop()
     window.update()
 
 
