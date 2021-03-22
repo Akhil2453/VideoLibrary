@@ -236,7 +236,7 @@ Label(screen2, text="Enter your Mobile Number to get Rewarded\n", font=myfont).g
 Label(screen2, text="Bottle Count: ", font=myfont).grid(row=1, column = 0, padx=(250,1), pady=5, columnspan=2)
 Label(screen2, textvariable=count, font=myfont).place(x=585, y=125) #grid(row=1, column=2, padx=(0,0), pady=5)
 Label(screen2, text="\n", font=myfont).grid(row=1, column = 3, padx=(0,0), pady=0)
-e = Entry(PageOne, textvariable=number, width=20, font=myfont)
+e = Entry(screen2, textvariable=number, width=20, font=myfont)
 e.grid(columnspan=3, row=2, column=0, padx=(200,1), pady=15)
 Button(screen2, text='1', command=lambda:num_get(1), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=0, padx=(200,10), pady=(15,0))
 Button(screen2, text='2', command=lambda:num_get(2), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=1, padx=(0,10), pady=(15,0))
