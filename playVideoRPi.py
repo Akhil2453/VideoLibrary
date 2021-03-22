@@ -2,6 +2,7 @@
 import cv2 
 import numpy as np
 from tkinter import *
+import tkinter.font as tkFont
 from pytube import YouTube
 import os
 import RPi.GPIO as GPIO
@@ -210,6 +211,11 @@ def enterScreen1():
     #window.after(5000, loop)
 
 #----------------------------Creating screens(Frames)-------------------------
+dfont = tkFont.Font(size=-6)
+myfont = tkFont.Font(size=24)
+mfont = tkFont.Font(size=20)
+nfont = tkFont.Font(size=20)
+
 screen2 = Frame(window)
 
 PageTwo = Frame(window)
