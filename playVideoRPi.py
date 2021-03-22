@@ -40,12 +40,12 @@ response = requests.get("http://clickcash.in/videoApi/videoApi.php", params=para
 
 #---------------------------------methods-----------------------------------
 def number_e():
-    global number
+    global phone
     global count
     global cnt
     global ret
-    num = number.get()
-    number.set(num)
+    num = phone.get()
+    phone.set(num)
     pushCnt = str(cnt)
     print(num)
     print(pushCnt)
@@ -53,7 +53,7 @@ def number_e():
     r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
     print(r.text)
     num=""
-    number.set(num)
+    phone.set(num)
     cnt = 0
     count.set(num)
     raise_frame(PageTwo)
@@ -63,16 +63,16 @@ def number_e():
     window.update()
 
 def exit():
-    global number
+    global phone
     global count
     global cnt
     pushCnt = str(cnt)
     print(pushCnt)
     para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000311', 'BTNO': pushCnt}
     r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
-    print(r.text)
+    print(r)
     num=""
-    number.set(num)
+    phone.set(num)
     cnt = 0
     count.set(num)
     raise_frame(PageTwo)
@@ -222,7 +222,7 @@ def enterScreen1():
 
 #----------------------------Creating screens(Frames)-------------------------
 dfont = tkFont.Font(size=-6)
-myfont = tkFont.Font(size=24)
+myfont = tkFont.Font(size=32)
 mfont = tkFont.Font(size=20)
 nfont = tkFont.Font(size=20)
 
@@ -242,28 +242,28 @@ for frame in (screen2, PageTwo):
 # screen2.rowconfigure(0,weight=1)
 # screen2.rowconfigure(8,weight=1)
 
-Label(screen2, text="Enter your Mobile Number to get Rewarded\n", font=myfont).grid(columnspan=3, row=0, column=0, padx=(185,1), pady=15)
-Label(screen2, text="Bottle Count: ", font=myfont).grid(row=1, column = 0, padx=(250,1), pady=5, columnspan=2)
-Label(screen2, textvariable=count, font=myfont).place(x=585, y=125) #grid(row=1, column=2, padx=(0,0), pady=5)
+Label(screen2, text="Enter your Mobile Number to get Rewarded\n", font=myfont).grid(columnspan=3, row=0, column=0, padx=(425,1), pady=(75,15))
+Label(screen2, text="Bottle Count: ", font=myfont).grid(row=1, column = 0, padx=(500,1), pady=5, columnspan=2)
+Label(screen2, textvariable=count, font=myfont).place(x=1015, y=215) #grid(row=1, column=2, padx=(0,0), pady=5)
 Label(screen2, text="\n", font=myfont).grid(row=1, column = 3, padx=(0,0), pady=0)
-e = Entry(screen2, textvariable=phone, width=20, font=myfont)
-e.grid(columnspan=3, row=2, column=0, padx=(200,1), pady=15)
-Button(screen2, text='1', command=lambda:enterNum(1), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=0, padx=(200,10), pady=(15,0))
-Button(screen2, text='2', command=lambda:enterNum(2), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=1, padx=(0,10), pady=(15,0))
-Button(screen2, text='3', command=lambda:enterNum(3), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=2, padx=(0,10), pady=(15,0))
-Button(screen2, text='4', command=lambda:enterNum(4), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=0, padx=(200,10), pady=(10,0))
-Button(screen2, text='5', command=lambda:enterNum(5), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=1, padx=(0,10), pady=(10,0))
-Button(screen2, text='6', command=lambda:enterNum(6), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=2, padx=(0,10), pady=(10,0))
-Button(screen2, text='7', command=lambda:enterNum(7), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=0, padx=(200,10), pady=(10,0))
-Button(screen2, text='8', command=lambda:enterNum(8), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=1, padx=(0,10), pady=(10,0))
-Button(screen2, text='9', command=lambda:enterNum(9), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=2, padx=(0,10), pady=(10,0))
-Button(screen2, text='0', command=lambda:enterNum(0), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=1, padx=(0,10), pady=(10,0))
-Button(screen2, text='Delete', command=delete, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=2, padx=(0,10), pady=(10,0))
-Button(screen2, text='Clear', command=clear, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=0, padx=(200,10), pady=(10,0))
-Button(screen2, text='Enter', bg='#0052cc', fg='#ffffff', command=number_e, borderwidth=5, relief=RAISED, height=1, width=22, font=nfont).grid(row=7, column=0, columnspan=2,padx=(200,10), pady=(10,0))
-Button(screen2, text='Cancel', command=cancel, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=7, column=2, padx=(0,10), pady=(10,0))
+e = Entry(screen2, textvariable=phone, width=30, font=myfont)
+e.grid(columnspan=3, row=2, column=0, padx=(375,1), pady=45)
+Button(screen2, text='1', command=lambda:enterNum(1), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=3, column=0, padx=(350,10), pady=(15,0))
+Button(screen2, text='2', command=lambda:enterNum(2), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=3, column=1, padx=(0,10), pady=(15,0))
+Button(screen2, text='3', command=lambda:enterNum(3), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=3, column=2, padx=(0,10), pady=(15,0))
+Button(screen2, text='4', command=lambda:enterNum(4), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=4, column=0, padx=(350,10), pady=(10,0))
+Button(screen2, text='5', command=lambda:enterNum(5), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=4, column=1, padx=(0,10), pady=(10,0))
+Button(screen2, text='6', command=lambda:enterNum(6), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=4, column=2, padx=(0,10), pady=(10,0))
+Button(screen2, text='7', command=lambda:enterNum(7), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=5, column=0, padx=(350,10), pady=(10,0))
+Button(screen2, text='8', command=lambda:enterNum(8), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=5, column=1, padx=(0,10), pady=(10,0))
+Button(screen2, text='9', command=lambda:enterNum(9), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=5, column=2, padx=(0,10), pady=(10,0))
+Button(screen2, text='0', command=lambda:enterNum(0), borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=6, column=1, padx=(0,10), pady=(10,0))
+Button(screen2, text='Delete', command=delete, borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=6, column=2, padx=(0,10), pady=(10,0))
+Button(screen2, text='Clear', command=clear, borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=6, column=0, padx=(350,10), pady=(10,0))
+Button(screen2, text='Enter', bg='#0052cc', fg='#ffffff', command=number_e, borderwidth=5, relief=RAISED, height=2, width=44, font=nfont).grid(row=7, column=0, columnspan=2,padx=(350,10), pady=(10,0))
+Button(screen2, text='Cancel', command=cancel, borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=7, column=2, padx=(0,10), pady=(10,0))
 
-Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environment clean.\n\n\n\nBe Clean. Go Green.", font=myfont).grid(row=1, column=1, padx=250, pady=150)
+Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environment clean.\n\n\n\nBe Clean. Go Green.", font=myfont).grid(row=1, column=1, padx=650, pady=300)
 
 setup()
 #enterScreen1()
