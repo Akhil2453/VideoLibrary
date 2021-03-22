@@ -2,7 +2,6 @@
 import cv2 
 import numpy as np
 from tkinter import *
-#import pymongo
 from pytube import YouTube
 import os
 import RPi.GPIO as GPIO
@@ -24,25 +23,59 @@ phone = StringVar()
 width = window.winfo_screenwidth()-50
 height = window.winfo_screenheight()-50
 window.geometry(str(width)+"x"+str(height))
-fontFamily="veranda"
-bgPink="#fce4ec"
-darkPink="#c2185b"
-bgButton="#81d3f9"
 phone.set("")
 
 #GPIO pins
 signal = 18
 
-#Database
-#connection = pymongo.MongoClient('mongodb+srv://Dikshitha:Dikshitha29@cluster1.xya37.mongodb.net/CigaretteBud?retryWrites=true&w=majority')
-#db = connection['CigaretteBud']
-#collection = db['videoLinks']
 
 #Api
 parameters = {'action':'viewsvideos','MCID':'002000311'}
 response = requests.get("http://clickcash.in/videoApi/videoApi.php", params=parameters)
 
 #---------------------------------methods-----------------------------------
+def number_e():
+    global number
+    global count
+    global cnt
+    num = number.get()
+    number.set(num)
+    pushCnt = str(cnt)
+    print(num)
+    print(pushCnt)
+    para = {'action': 'saveUserData', 'MOB': num, 'MCID': '002000311', 'BTNO': pushCnt}
+    r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
+    print(r.text)
+    num=""
+    number.set(num)
+    cnt = 0
+    count.set(num)
+    raise_frame(PageTwo)
+    root.update()
+    time.sleep(5)
+    raise_frame(welcome)
+    root.update()
+
+def exit():
+    global number
+    global count
+    global cnt
+    pushCnt = str(cnt)
+    print(pushCnt)
+    para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000311', 'BTNO': pushCnt}
+    r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
+    print(r.text)
+    num=""
+    number.set(num)
+    cnt = 0
+    count.set(num)
+    raise_frame(PageTwo)
+    root.update()
+    time.sleep(5)
+    raise_frame(welcome)
+    root.update()
+
+
 def enterNum(digit):
     phone.set(phone.get()+digit)
     entryPhone.icursor("end")
@@ -106,6 +139,7 @@ def loop():
                         audio_frame = None
                         val = None
                         enterScreen1()
+                        root.after(30000, exit)
                         return
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -177,100 +211,43 @@ def enterScreen1():
 
 #----------------------------Creating screens(Frames)-------------------------
 screen2 = Frame(window)
-screen2.config(padx=20, pady=20)
-screen2.place(relwidth=1, relheight=1)
 
-screen2.columnconfigure(0,weight=1)
-screen2.columnconfigure(1,weight=1)
-screen2.columnconfigure(2,weight=1)
-screen2.rowconfigure(0,weight=1)
-screen2.rowconfigure(8,weight=1)
+PageTwo = Frame(window)
 
-Label(screen2,
-      text="Phone Number : ",
-      font=(fontFamily,14,"italic"),
-      bg=bgPink).grid(row=1,column=0,sticky=NE,padx=5,pady=5)
-entryPhone = Entry(screen2,
-             textvariable=phone,
-             font=(fontFamily,14,"normal"))
-entryPhone.grid(row=1,column=1,columnspan=2,sticky=NW,padx=5,pady=5)
-Button(screen2,
-       text="1",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("1")).grid(row=2,column=0,sticky="nesw")
-Button(screen2,
-       text="2",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("2")).grid(row=2,column=1,sticky="nesw")
-Button(screen2,
-       text="3",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("3")).grid(row=2,column=2,sticky="nesw")
-Button(screen2,
-       text="4",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("4")).grid(row=3,column=0,sticky="nesw")
-Button(screen2,
-       text="5",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("5")).grid(row=3,column=1,sticky="nesw")
-Button(screen2,
-       text="6",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("6")).grid(row=3,column=2,sticky="nesw")
-Button(screen2,
-       text="7",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("7")).grid(row=4,column=0,sticky="nesw")
-Button(screen2,
-       text="8",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("8")).grid(row=4,column=1,sticky="nesw")
-Button(screen2,
-       text="9",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("9")).grid(row=4,column=2,sticky="nesw")
-Button(screen2,
-       text="Del",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=delete).grid(row=5,column=0,sticky="nesw")
-Button(screen2,
-       text="0",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=lambda: enterNum("0")).grid(row=5,column=1,sticky="nesw")
-Button(screen2,
-       text="Clear",
-       font=(fontFamily,14,"italic"),
-       bg=darkPink,
-       command=clear).grid(row=5,column=2,sticky="nesw")
-Button(screen2,
-       text="Continue",
-       font=(fontFamily,14,"normal"),
-       justify=CENTER,
-       fg="black",
-       bg=bgButton,
-       activeforeground="white",
-       activebackground=bgButton,
-       relief=RIDGE,
-       command=loop).grid(row=7,column=0,columnspan=3,padx=20,pady=10)
-lblError = Label(screen2,
-                 text="*Enter A Valid Phone Number",
-                 font=(fontFamily,14,"italic"),
-                 fg="red",
-                 bg=bgPink)
-lblError.grid_forget()
+for frame in (screen2, PageTwo):
+    frame.grid(row=8, column=3, sticky='news')
 
+# screen2.config(padx=20, pady=20)
+# screen2.place(relwidth=1, relheight=1)
+
+# screen2.columnconfigure(0,weight=1)
+# screen2.columnconfigure(1,weight=1)
+# screen2.columnconfigure(2,weight=1)
+# screen2.rowconfigure(0,weight=1)
+# screen2.rowconfigure(8,weight=1)
+
+Label(screen2, text="Enter your Mobile Number to get Rewarded\n", font=myfont).grid(columnspan=3, row=0, column=0, padx=(185,1), pady=15)
+Label(screen2, text="Bottle Count: ", font=myfont).grid(row=1, column = 0, padx=(250,1), pady=5, columnspan=2)
+Label(screen2, textvariable=count, font=myfont).place(x=585, y=125) #grid(row=1, column=2, padx=(0,0), pady=5)
+Label(screen2, text="\n", font=myfont).grid(row=1, column = 3, padx=(0,0), pady=0)
+e = Entry(PageOne, textvariable=number, width=20, font=myfont)
+e.grid(columnspan=3, row=2, column=0, padx=(200,1), pady=15)
+Button(screen2, text='1', command=lambda:num_get(1), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=0, padx=(200,10), pady=(15,0))
+Button(screen2, text='2', command=lambda:num_get(2), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=1, padx=(0,10), pady=(15,0))
+Button(screen2, text='3', command=lambda:num_get(3), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=3, column=2, padx=(0,10), pady=(15,0))
+Button(screen2, text='4', command=lambda:num_get(4), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=0, padx=(200,10), pady=(10,0))
+Button(screen2, text='5', command=lambda:num_get(5), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=1, padx=(0,10), pady=(10,0))
+Button(screen2, text='6', command=lambda:num_get(6), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=4, column=2, padx=(0,10), pady=(10,0))
+Button(screen2, text='7', command=lambda:num_get(7), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=0, padx=(200,10), pady=(10,0))
+Button(screen2, text='8', command=lambda:num_get(8), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=1, padx=(0,10), pady=(10,0))
+Button(screen2, text='9', command=lambda:num_get(9), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=5, column=2, padx=(0,10), pady=(10,0))
+Button(screen2, text='0', command=lambda:num_get(0), borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=1, padx=(0,10), pady=(10,0))
+Button(screen2, text='Delete', command=delt, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=2, padx=(0,10), pady=(10,0))
+Button(screen2, text='Clear', command=clr, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=6, column=0, padx=(200,10), pady=(10,0))
+Button(screen2, text='Enter', bg='#0052cc', fg='#ffffff', command=number_e, borderwidth=5, relief=RAISED, height=1, width=22, font=nfont).grid(row=7, column=0, columnspan=2,padx=(200,10), pady=(10,0))
+Button(screen2, text='Cancel', command=cancel, borderwidth=5, relief=RAISED, height=1, width=10, font=nfont).grid(row=7, column=2, padx=(0,10), pady=(10,0))
+
+Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environment clean.\n\n\n\nBe Clean. Go Green.", font=myfont).grid(row=1, column=1, padx=250, pady=150)
 
 setup()
 #enterScreen1()
