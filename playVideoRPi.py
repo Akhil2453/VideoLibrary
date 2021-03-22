@@ -83,7 +83,7 @@ def exit():
 
 
 def enterNum(digit):
-    phone.set(phone.get()+digit)
+    phone.set(phone.get()+str(digit))
     entryPhone.icursor("end")
 
 def delete():
