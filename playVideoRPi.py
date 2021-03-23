@@ -49,9 +49,9 @@ def number_e():
     pushCnt = str(cnt)
     print(num)
     print(pushCnt)
-    para = {'action': 'saveUserData', 'MOB': num, 'MCID': '002000311', 'BTNO': pushCnt}
+    para = {'action': 'saveUserData', 'MOB': num, 'MCID': '002000312', 'BTNO': pushCnt}
     r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
-    print(r.text)
+    print(r)
     num=""
     phone.set(num)
     cnt = 0
@@ -70,7 +70,7 @@ def exit():
     global cnt
     pushCnt = str(cnt)
     print(pushCnt)
-    para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000311', 'BTNO': pushCnt}
+    para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000312', 'BTNO': pushCnt}
     r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
     print(r)
     num=""
@@ -98,9 +98,10 @@ def clear():
 
 def cancel():
     global cnt
-    loop()
     cnt = 0
     e.delete(0, END)
+    loop()
+    
 
 def setup():
     GPIO.setwarnings(False)
