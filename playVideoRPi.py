@@ -56,8 +56,8 @@ def number_e():
     phone.set(num)
     cnt = 0
     count.set(num)
-    scree2.grid_forget()
-    PageTwo.grid(Label)
+    screen2.grid_forget()
+    PageTwo.grid(row=8, column=3, sticky='news')
     window.update()
     time.sleep(5)
     PageTwo.grid_forget()
@@ -77,8 +77,8 @@ def exit():
     phone.set(num)
     cnt = 0
     count.set(num)
-    scree2.grid_forget()
-    PageTwo.grid(Label)
+    screen2.grid_forget()
+    PageTwo.grid(row=8, column=3, sticky='news')
     window.update()
     time.sleep(5)
     PageTwo.grid_forget()
@@ -88,7 +88,7 @@ def exit():
 
 def enterNum(digit):
     phone.set(phone.get()+str(digit))
-    entryPhone.icursor("end")
+    e.icursor("end")
 
 def delete():
     phone.set(phone.get()[:-1])
@@ -98,7 +98,7 @@ def clear():
 
 def cancel():
     global cnt
-    raise_frame(welcome)
+    loop()
     cnt = 0
     e.delete(0, END)
 
@@ -147,15 +147,15 @@ def loop():
                         cv2.destroyAllWindows()
                         window.update()
                         window.deiconify()
-                        raise_frame(screen2)
-                        time.sleep(0.2)
+                        screen2.grid(row=8, column=3, sticky='news')
+                        #time.sleep(0.2)
                         print("Button Pressed")
                         cnt = cnt + 1
                         count.set(cnt)
                         print("Count: ", cnt)
                         audio_frame = None
                         val = None
-                        enterScreen1()
+                        #enterScreen1()
                         window.after(30000, exit)
                         return
                         
@@ -165,14 +165,16 @@ def loop():
                         window.deiconify()
                         cap.release()
                         cv2.destroyAllWindows()
-                        time.sleep(0.2)
+                        screen2.grid(row=8, column=3, sticky='news')
+                        #time.sleep(0.2)
                         print("Button Pressed")
                         cnt = cnt + 1
                         count.set(cnt)
                         print("count", cnt)
                         audio_frame = None
                         val = None
-                        enterScreen1()
+                        #enterScreen1()
+                        window.after(30000,exit)
                         return
 
                     if val != 'eof' and audio_frame is not None:
@@ -183,6 +185,7 @@ def loop():
 
             cap.release()
         cv2.destroyAllWindows()
+    loop()
 
         #window.after(500, loop)
     
@@ -236,8 +239,8 @@ screen2 = Frame(window)
 
 PageTwo = Frame(window)
 
-for frame in (screen2, PageTwo):
-    frame.grid(row=8, column=3, sticky='news')
+#for frame in (screen2, PageTwo):
+    #frame.grid(row=8, column=3, sticky='news')
 
 # screen2.config(padx=20, pady=20)
 # screen2.place(relwidth=1, relheight=1)
