@@ -121,7 +121,6 @@ def loop():
     global count
     global cnt
     global files
-    a = GPIO.input(signal)
     for i in files:
         cap = cv2.VideoCapture(i)
         player = MediaPlayer(i)
