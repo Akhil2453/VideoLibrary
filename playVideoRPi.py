@@ -199,7 +199,7 @@ def lists():
     for video in videosApi:
         link = video['video']
         videoList.append(link)
-    files = os.listdir("/home/pi/Desktop/video")
+    files = os.listdir("/home/pi/Desktop/video/video")
     print(len(files))
     for x in videoList:
         num=num+1
@@ -222,7 +222,7 @@ def lists():
             c=c+1
             print(c)
             videoStream=yt.streams.first()
-            videoStream.download("/home/pi/Desktop/video","video"+str(c))
+            videoStream.download("/home/pi/Desktop/video/video","video"+str(c))
     
 def enterScreen1():
     window.update()
