@@ -124,10 +124,10 @@ def loop():
     a = GPIO.input(signal)
     for i in files:
         #a = GPIO.input(signal)
-        print(i)
-        cap = cv2.VideoCapture(i)
+        b = '/home/pi/Desktop/videoLibrary/video/' + i
+        cap = cv2.VideoCapture(b)
         print(cap.isOpened())
-        player = MediaPlayer(i)
+        player = MediaPlayer(b)
         if (cap.isOpened()==False):
             print("Error opening video file")
         else:
@@ -152,14 +152,12 @@ def loop():
                         window.update()
                         window.deiconify()
                         screen2.grid(row=8, column=3, sticky='news')
-                        #time.sleep(0.2)
                         print("Button Pressed")
                         cnt = cnt + 1
                         count.set(cnt)
                         print("Count: ", cnt)
                         audio_frame = None
                         val = None
-                        #enterScreen1()
                         window.after(30000, exit)
                         return
                         
