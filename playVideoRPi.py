@@ -35,7 +35,7 @@ def raise_frame(frame):
     frame.tkraise()
 
 #Api
-parameters = {'action':'viewsvideos','MCID':'002000311'}
+parameters = {'action':'viewsvideos','MCID':'002000312'}
 response = requests.get("http://clickcash.in/videoApi/videoApi.php", params=parameters)
 
 #---------------------------------methods-----------------------------------
@@ -123,11 +123,8 @@ def loop():
     global files
     a = GPIO.input(signal)
     for i in files:
-        #a = GPIO.input(signal)
         b = '/home/pi/Desktop/videoLibrary/video/' + i
-        print(b)
         cap = cv2.VideoCapture(b)
-        print(cap.isOpened())
         player = MediaPlayer(b)
         if (cap.isOpened()==False):
             print("Error opening video file")
@@ -150,9 +147,9 @@ def loop():
                         a = True
                         cap.release()
                         cv2.destroyAllWindows()
-                        screen2.grid(row=8, column=3, sticky='news')
                         window.update()
                         window.deiconify()
+                        screen2.grid(row=8, column=3, sticky='news')
                         #raise_frame(screen2)
                         #window.update()
                         print("Button Pressed")
@@ -161,23 +158,26 @@ def loop():
                         print("Count: ", cnt)
                         audio_frame = None
                         val = None
-                        if a == False and cnt >=1:
-                            screen2.grid(row=8, column=3, sticky='news')
-                            window.update()
-                            window.deiconify()
-                            #raise_frame(screen2)
-                            #window.update()
-                            print("Button Pressed")
-                            cnt = cnt + 1
-                            count.set(cnt)
-                            print("Count: ", cnt)
-                            audio_frame = None
-                            val = None
-                            window.after(30000, exit)
                         window.after(30000, exit)
+                        return
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
-                        break
+                        a = True
+                        window.update()
+                        window.deiconify()
+                        cap.release()
+                        cv2.destroyAllWindows()
+                        screen2.grid(row=8, column=3, sticky='news')
+                        #time.sleep(0.2)
+                        print("Button Pressed")
+                        cnt = cnt + 1
+                        count.set(cnt)
+                        print("count", cnt)
+                        audio_frame = None
+                        val = None
+                        #enterScreen1()
+                        window.after(30000,exit)
+                        return
 
                     if val != 'eof' and audio_frame is not None:
                         img, t = audio_frame
