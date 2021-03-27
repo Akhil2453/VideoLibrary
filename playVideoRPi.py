@@ -125,6 +125,7 @@ def loop():
     for i in files:
         #a = GPIO.input(signal)
         b = '/home/pi/Desktop/videoLibrary/video/' + i
+        print(b)
         cap = cv2.VideoCapture(b)
         print(cap.isOpened())
         player = MediaPlayer(b)
@@ -162,7 +163,7 @@ def loop():
                         return
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
-                        return
+                        break
 
                     if val != 'eof' and audio_frame is not None:
                         img, t = audio_frame
