@@ -125,6 +125,8 @@ def loop():
     for i in files:
         #a = GPIO.input(signal)
         cap = cv2.VideoCapture(i)
+        print(cap)
+        print(cap.isOpened)
         player = MediaPlayer(i)
         if (cap.isOpened()==False):
             print("Error opening video file")
