@@ -35,6 +35,12 @@ for i in files:
                 dim = (window_width, window_height)
                 cv2.resizeWindow('Frame',window_width, window_height)
                 cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# When everything done, release the capture
+cap.release()
+cv2.destroyAllWindows()
 
 # cap = cv2.VideoCapture('video1.mp4')
 # player = MediaPlayer('video1.mp4')
