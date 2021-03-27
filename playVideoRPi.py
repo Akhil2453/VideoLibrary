@@ -261,7 +261,7 @@ Button(screen2, text='Cancel', command=cancel, borderwidth=5, relief=RAISED, hei
 
 Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environment clean.\n\n\n\nBe Clean. Go Green.", font=myfont).grid(row=1, column=1, padx=650, pady=300)
 
-lists
+lists()
 setup()
 loop()
 window.mainloop()
