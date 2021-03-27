@@ -162,7 +162,7 @@ def loop():
                         audio_frame = None
                         val = None
                         window.after(30000, exit)
-                        return
+                        
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
