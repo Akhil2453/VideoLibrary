@@ -154,6 +154,7 @@ def loop():
                         # window.update()
                         # window.deiconify()
                         raise_frame(screen2)
+                        window.update()
                         print("Button Pressed")
                         cnt = cnt + 1
                         count.set(cnt)
