@@ -184,7 +184,7 @@ def loop():
 
             cap.release()
         cv2.destroyAllWindows()
-    window.after(1000, loop)
+    loop()
 
         #window.after(500, loop)
     
