@@ -9,14 +9,16 @@ window = Tk()
 width = window.winfo_screenwidth() - 25
 height = window.winfo_screenheight() - 25
 
-files = os.listdir("/home/pi/Desktop/videoLibrary/video")
+files = os.listdir('/home/pi/Desktop/videoLibrary/video/')
 
 
 for i in files:
-	print(i)
-    cap = cv2.VideoCapture(i)
+    print(i)
+    print(type(i))
+    b = '/home/pi/Desktop/videoLibrary/video/' + i
+    cap = cv2.VideoCapture(b)
     print(cap.isOpened())
-    player = MediaPlayer(i)
+    player = MediaPlayer(b)
     if (cap.isOpened()==False):
         print("Error opening video file")
     else:
@@ -25,7 +27,7 @@ for i in files:
             audio_frame, val = player.get_frame()
                 
             if ret == True:
-                a = GPIO.input(signal)
+                #a = GPIO.input(signal)
                 scale_width = width/frame.shape[1]
                 scale_height = height/frame.shape[0]
                 window_width = int(frame.shape[1]*scale_width)
