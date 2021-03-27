@@ -21,8 +21,8 @@ a = True
 cnt = 0
 count = StringVar()
 phone = StringVar()
-width = window.winfo_screenwidth()
-height = window.winfo_screenheight()
+width = window.winfo_screenwidth() - 25
+height = window.winfo_screenheight() - 25
 window.geometry(str(width)+"x"+str(height))
 phone.set("")
 ret = False
