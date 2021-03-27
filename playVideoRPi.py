@@ -184,7 +184,7 @@ def loop():
 
             cap.release()
         cv2.destroyAllWindows()
-    loop()
+    window.after(1000, loop)
 
         #window.after(500, loop)
     
@@ -238,18 +238,6 @@ screen2 = Frame(window)
 
 PageTwo = Frame(window)
 
-#for frame in (screen2, PageTwo):
-    #frame.grid(row=8, column=3, sticky='news')
-
-# screen2.config(padx=20, pady=20)
-# screen2.place(relwidth=1, relheight=1)
-
-# screen2.columnconfigure(0,weight=1)
-# screen2.columnconfigure(1,weight=1)
-# screen2.columnconfigure(2,weight=1)
-# screen2.rowconfigure(0,weight=1)
-# screen2.rowconfigure(8,weight=1)
-
 Label(screen2, text="Enter your Mobile Number to get Rewarded\n", font=myfont).grid(columnspan=3, row=0, column=0, padx=(425,1), pady=(75,15))
 Label(screen2, text="Bottle Count: ", font=myfont).grid(row=1, column = 0, padx=(500,1), pady=5, columnspan=2)
 Label(screen2, textvariable=count, font=myfont).place(x=1015, y=215) #grid(row=1, column=2, padx=(0,0), pady=5)
@@ -275,7 +263,5 @@ Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environ
 
 lists
 setup()
-#enterScreen1()
-#window.after(500, loop)
 loop()
 window.mainloop()
