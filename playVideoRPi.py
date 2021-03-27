@@ -150,9 +150,10 @@ def loop():
                         a = True
                         cap.release()
                         cv2.destroyAllWindows()
+                        screen2.grid(row=8, column=3, sticky='news')
                         window.update()
                         window.deiconify()
-                        screen2.grid(row=8, column=3, sticky='news')
+                        
                         print("Button Pressed")
                         cnt = cnt + 1
                         count.set(cnt)
