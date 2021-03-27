@@ -164,21 +164,6 @@ def loop():
                         return
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
-                        a = True
-                        window.update()
-                        window.deiconify()
-                        cap.release()
-                        cv2.destroyAllWindows()
-                        screen2.grid(row=8, column=3, sticky='news')
-                        #time.sleep(0.2)
-                        print("Button Pressed")
-                        cnt = cnt + 1
-                        count.set(cnt)
-                        print("count", cnt)
-                        audio_frame = None
-                        val = None
-                        #enterScreen1()
-                        window.after(30000,exit)
                         return
 
                     if val != 'eof' and audio_frame is not None:
