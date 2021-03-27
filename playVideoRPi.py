@@ -151,7 +151,7 @@ def loop():
                         cap.release()
                         cv2.destroyAllWindows()
                         screen2.grid(row=8, column=3, sticky='news')
-                        # window.update()
+                        window.update()
                         # window.deiconify()
                         raise_frame(screen2)
                         window.update()
