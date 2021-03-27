@@ -114,13 +114,16 @@ def endprogram():
 def loop():
     window.update()
     window.withdraw()
+    lists()
     global width
     global height
     global a
     global count
     global cnt
     global files
+    a = GPIO.input(signal)
     for i in files:
+        #a = GPIO.input(signal)
         cap = cv2.VideoCapture(i)
         player = MediaPlayer(i)
         if (cap.isOpened()==False):
@@ -204,7 +207,7 @@ def lists():
         num=num+1
     print(num)
     print(len(videos))
-    if(len(files)-5)==num:
+    if(len(files))==num:
         print('No downloading...')
         c=num
     else:
@@ -261,7 +264,7 @@ Button(screen2, text='Cancel', command=cancel, borderwidth=5, relief=RAISED, hei
 
 Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environment clean.\n\n\n\nBe Clean. Go Green.", font=myfont).grid(row=1, column=1, padx=650, pady=300)
 
-lists()
+#lists()
 setup()
 loop()
 window.mainloop()
