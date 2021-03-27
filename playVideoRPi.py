@@ -161,8 +161,20 @@ def loop():
                         print("Count: ", cnt)
                         audio_frame = None
                         val = None
+                        if a == False and cnt >=1:
+                            screen2.grid(row=8, column=3, sticky='news')
+                            window.update()
+                            window.deiconify()
+                            #raise_frame(screen2)
+                            #window.update()
+                            print("Button Pressed")
+                            cnt = cnt + 1
+                            count.set(cnt)
+                            print("Count: ", cnt)
+                            audio_frame = None
+                            val = None
+                            window.after(30000, exit)
                         window.after(30000, exit)
-                        
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
