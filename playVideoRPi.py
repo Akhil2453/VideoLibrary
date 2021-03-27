@@ -21,8 +21,8 @@ a = True
 cnt = 0
 count = StringVar()
 phone = StringVar()
-width = window.winfo_screenwidth()-50
-height = window.winfo_screenheight()-50
+width = window.winfo_screenwidth()
+height = window.winfo_screenheight()
 window.geometry(str(width)+"x"+str(height))
 phone.set("")
 ret = False
@@ -114,7 +114,6 @@ def endprogram():
 def loop():
     window.update()
     window.withdraw()
-    lists()
     global width
     global height
     global a
@@ -199,7 +198,7 @@ def lists():
     for video in videosApi:
         link = video['video']
         videoList.append(link)
-    files = os.listdir("/home/pi/Desktop/video/video")
+    files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     print(len(files))
     for x in videoList:
         num=num+1
@@ -222,7 +221,7 @@ def lists():
             c=c+1
             print(c)
             videoStream=yt.streams.first()
-            videoStream.download("/home/pi/Desktop/video/video","video"+str(c))
+            videoStream.download("/home/pi/Desktop/videoLibrary/video","video"+str(c))
     
 def enterScreen1():
     window.update()
@@ -274,6 +273,7 @@ Button(screen2, text='Cancel', command=cancel, borderwidth=5, relief=RAISED, hei
 
 Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environment clean.\n\n\n\nBe Clean. Go Green.", font=myfont).grid(row=1, column=1, padx=650, pady=300)
 
+lists
 setup()
 #enterScreen1()
 #window.after(500, loop)
