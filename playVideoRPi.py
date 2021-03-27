@@ -124,6 +124,7 @@ def loop():
     a = GPIO.input(signal)
     for i in files:
         #a = GPIO.input(signal)
+        print(i)
         cap = cv2.VideoCapture(i)
         print(cap.isOpened())
         player = MediaPlayer(i)
