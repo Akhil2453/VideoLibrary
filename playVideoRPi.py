@@ -148,11 +148,11 @@ def loop():
                         audio_frame = None
                         val = None
                         window.update()
-                        #window.deiconify()
+                        window.deiconify()
                         screen2.grid(row=8, column=3, sticky='news')
                         print("Button Pressed")
                         cnt = cnt + 1
-                        count.set(cnt)
+                        #count.set(cnt)
                         print("Count: ", cnt)
                         #audio_frame = None
                         #val = None
