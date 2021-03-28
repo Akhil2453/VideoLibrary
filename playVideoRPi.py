@@ -142,7 +142,10 @@ def loop():
                     dim = (window_width, window_height)
                     cv2.resizeWindow('Frame',window_width, window_height)
                     #cv2. setWindowProperty ('Frame', cv2. WND_PROP_FULLSCREEN, cv2. WINDOW_FULLSCREEN)
-                    cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
+                    #cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
+                    cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
+                    cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+                    cv2.imshow ('Frame', frame)
                    
                     if a == False:
                         a = True
