@@ -81,12 +81,12 @@ def exita():
     num=""
     phone.set(num)
     cnt = 1
-    count.set(num)
+    count.set(cnt)
     screen2.grid_forget()
-    PageTwo.grid(row=8, column=3, sticky='news')
-    window.update()
-    time.sleep(5)
-    PageTwo.grid_forget()
+    # PageTwo.grid(row=8, column=3, sticky='news')
+    # window.update()
+    # time.sleep(5)
+    # PageTwo.grid_forget()
     loop()
     window.update()
 
@@ -135,6 +135,8 @@ def loop():
                 a = GPIO.input(signal)
                 ret, frame = cap.read()
                 audio_frame, val = player.get_frame()
+                cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
+                cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
                 
                 if ret == True:
                     a = GPIO.input(signal)
@@ -178,6 +180,9 @@ def loop():
 
             cap.release()
         cv2.destroyAllWindows()
+    if (screen2.winfo_ismapped()):{
+        window.after(30000, exita)
+    }
     window.after(500, loop)
 
 def lists():
