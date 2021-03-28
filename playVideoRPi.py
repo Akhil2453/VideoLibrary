@@ -161,7 +161,7 @@ def loop():
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
-                            window.after(30000, exita)
+                            #window.after(30000, exita)
                         else:
                             time.sleep(0.3)
                             
