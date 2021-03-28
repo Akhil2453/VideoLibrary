@@ -14,13 +14,13 @@ import requests
 window = Tk()
 window.title("Bottle Crusher")
 window.geometry('1920x1040')
-#window.attributes('-fullscreen', True)
+window.attributes('-fullscreen', True)
 #---------------------------------utils----------------------------------
 videos=[]
 files=[]
 c = 0
 a = True
-cnt = 0
+cnt = 1
 count = StringVar()
 phone = StringVar()
 phone.set("")
@@ -29,6 +29,7 @@ dfont = tkFont.Font(size=-6)
 myfont = tkFont.Font(size=32)
 mfont = tkFont.Font(size=20)
 nfont = tkFont.Font(size=20)
+count.set(cnt)
 
 
 #GPIO pins
@@ -58,8 +59,8 @@ def number_e():
     print(r)
     num=""
     phone.set(num)
-    cnt = 0
-    count.set(num)
+    cnt = 1
+    count.set(cnt)
     screen2.grid_forget()
     PageTwo.grid(row=8, column=3, sticky='news')
     window.update()
@@ -68,7 +69,7 @@ def number_e():
     loop()
     window.update()
 
-def exit():
+def exita():
     global phone
     global count
     global cnt
@@ -79,7 +80,7 @@ def exit():
     print(r)
     num=""
     phone.set(num)
-    cnt = 0
+    cnt = 1
     count.set(num)
     screen2.grid_forget()
     PageTwo.grid(row=8, column=3, sticky='news')
@@ -141,9 +142,10 @@ def loop():
                     cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
                     cv2.imshow ('Frame', frame)
                    
-                    if(a == False):
+                    while(a == False) :
                         #a = True
-                        time.sleep(1)
+                        time.sleep(0.7)
+                        player = None
                         cap.release()
                         cv2.destroyAllWindows()
                         audio_frame = None
@@ -151,19 +153,18 @@ def loop():
                         window.update()
                         window.deiconify()
                         screen2.grid(row=8, column=3, sticky='news')
-                        print("Button Pressed")
-                        cnt = cnt + 1
-                        count.set(cnt)
-                        print("Count: ", cnt)
-                        #a = True
-                        #if a == True:
-                        #    return
-                        #else:
-                        #    continue
-                        #audio_frame = None
-                        #val = None
-                        window.after(30000, exit)
+                        a = GPIO.input(signal)
+                        if a==False:
+                            print("Button Pressed")
+                            cnt = cnt + 1
+                            count.set(cnt)
+                            print("Count: ", cnt)
+                        else:
+                            time.sleep(0.3)
+                            
+                        a=False
                         #break
+                    #window.after(30000, exit)   #return
                        
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         return
@@ -217,6 +218,8 @@ def enterScreen1():
     window.update()
     window.deiconify()
 
+
+
 #----------------------------Creating screens(Frames)-------------------------
 
 
@@ -246,6 +249,8 @@ Button(screen2, text='Enter', bg='#0052cc', fg='#ffffff', command=number_e, bord
 Button(screen2, text='Cancel', command=cancel, borderwidth=5, relief=RAISED, height=2, width=20, font=nfont).grid(row=7, column=2, padx=(0,10), pady=(10,0))
 
 Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environment clean.\n\n\n\nBe Clean. Go Green.", font=myfont).grid(row=1, column=1, padx=650, pady=300)
+
+
 
 lists()
 setup()
