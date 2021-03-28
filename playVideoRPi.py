@@ -122,8 +122,10 @@ def loop():
     global a
     global count
     global cnt
+    a = GPIO.input(signal)
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     for i in files:
+        a = GPIO.input(signal)
         b = '/home/pi/Desktop/videoLibrary/video/' + i
         cap = cv2.VideoCapture(b)
         player = MediaPlayer(b)
@@ -131,7 +133,7 @@ def loop():
             print("Error opening video file")
         else:
             while(cap.isOpened()):
-                a = GPIO.input(signal)
+                
                 ret, frame = cap.read()
                 audio_frame, val = player.get_frame()
                 
@@ -141,44 +143,9 @@ def loop():
                     cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
                     cv2.imshow ('Frame', frame)
                    
-                    if(a == False):
-                        #a = True
-                        time.sleep(1)
-                        cap.release()
-                        cv2.destroyAllWindows()
-                        audio_frame = None
-                        val = None
-                        window.update()
-                        window.deiconify()
-                        screen2.grid(row=8, column=3, sticky='news')
-                        print("Button Pressed")
-                        cnt = cnt + 1
-                        count.set(cnt)
-                        print("Count: ", cnt)
-                        #a = True
-                        #if a == True:
-                        #    return
-                        #else:
-                        #    continue
-                        #audio_frame = None
-                        #val = None
-                        #window.after(30000, exit)
-                        #break
+                    
                        
                     if cv2.waitKey(1) & 0xFF == ord('q'):
-                        a = True
-                        window.update()
-                        window.deiconify()
-                        cap.release()
-                        cv2.destroyAllWindows()
-                        screen2.grid(row=8, column=3, sticky='news')
-                        print("Button Pressed")
-                        cnt = cnt + 1
-                        count.set(cnt)
-                        print("count", cnt)
-                        audio_frame = None
-                        val = None
-                        window.after(30000,exit)
                         return
 
                     if val != 'eof' and audio_frame is not None:
@@ -186,6 +153,29 @@ def loop():
                         
                 else:
                     break
+        if(a == False):
+            #a = True
+            time.sleep(1)
+            cap.release()
+            cv2.destroyAllWindows()
+            audio_frame = None
+            val = None
+            window.update()
+            window.deiconify()
+            screen2.grid(row=8, column=3, sticky='news')
+            print("Button Pressed")
+            cnt = cnt + 1
+            count.set(cnt)
+            print("Count: ", cnt)
+            #a = True
+            #if a == True:
+            #    return
+            #else:
+            #    continue
+            #audio_frame = None
+            #val = None
+            window.after(30000, exit)
+            #break
 
             cap.release()
         cv2.destroyAllWindows()
