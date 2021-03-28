@@ -21,8 +21,8 @@ a = True
 cnt = 0
 count = StringVar()
 phone = StringVar()
-width = window.winfo_screenwidth() - 25
-height = window.winfo_screenheight() - 25
+width = window.winfo_screenwidth() - 20
+height = window.winfo_screenheight() - 15
 window.geometry(str(width)+"x"+str(height))
 phone.set("")
 ret = False
@@ -140,9 +140,9 @@ def loop():
                     window_width = int(frame.shape[1]*scale_width)
                     window_height = int(frame.shape[0]*scale_height)
                     dim = (window_width, window_height)
-                    #cv2.resizeWindow('Frame',window_width, window_height)
-                    cv2. setWindowProperty ('Frame', cv2. WND_PROP_FULLSCREEN, cv2. WINDOW_FULLSCREEN)
-                    cv2.imshow('Frame', frame) #cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
+                    cv2.resizeWindow('Frame',window_width, window_height)
+                    #cv2. setWindowProperty ('Frame', cv2. WND_PROP_FULLSCREEN, cv2. WINDOW_FULLSCREEN)
+                    cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
                    
                     if a == False:
                         a = True
