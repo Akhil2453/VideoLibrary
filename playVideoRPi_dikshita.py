@@ -187,7 +187,7 @@ def loop():
 
             cap.release()
         cv2.destroyAllWindows()
-    loop()
+    window.after(500, loop)
 
         #window.after(500, loop)
     
@@ -280,5 +280,5 @@ Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environ
 setup()
 #enterScreen1()
 #window.after(500, loop)
-window.after(loop)
+window.after(1000, loop)
 window.mainloop()
