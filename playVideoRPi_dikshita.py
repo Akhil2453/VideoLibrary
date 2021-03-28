@@ -35,7 +35,7 @@ def raise_frame(frame):
     frame.tkraise()
 
 #Api
-parameters = {'action':'viewsvideos','MCID':'002000311'}
+parameters = {'action':'viewsvideos','MCID':'002000312'}
 response = requests.get("http://clickcash.in/videoApi/videoApi.php", params=parameters)
 
 #---------------------------------methods-----------------------------------
