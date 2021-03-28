@@ -123,8 +123,9 @@ def loop():
     global files
     a = GPIO.input(signal)
     for i in files:
-        cap = cv2.VideoCapture(i)
-        player = MediaPlayer(i)
+        b = '/home/pi/Desktop/videoLibrary/video/' + i
+        cap = cv2.VideoCapture(b)
+        player = MediaPlayer(b)
         if (cap.isOpened()==False):
             print("Error opening video file")
         else:
