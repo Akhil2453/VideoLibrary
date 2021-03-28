@@ -143,15 +143,16 @@ def loop():
                     cv2.resizeWindow('Frame',window_width, window_height)
                     cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
                     
-                    if a == False:
-                        a = True
+                    while(a == False):
                         cap.release()
                         cv2.destroyAllWindows()
                         window.update()
                         window.deiconify()
                         screen2.grid(row=8, column=3, sticky='news')
+                        a = GPIO.input(signal)
                         #time.sleep(0.2)
                         print("Button Pressed")
+                        #if a == False:
                         cnt = cnt + 1
                         count.set(cnt)
                         print("Count: ", cnt)
@@ -159,7 +160,7 @@ def loop():
                         val = None
                         #enterScreen1()
                         window.after(30000, exit)
-                        return
+                        #return
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         a = True

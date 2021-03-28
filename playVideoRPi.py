@@ -141,8 +141,9 @@ def loop():
                     cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
                     cv2.imshow ('Frame', frame)
                    
-                    if a == False:
+                    if(a == False):
                         #a = True
+                        time.sleep(1)
                         cap.release()
                         cv2.destroyAllWindows()
                         audio_frame = None
@@ -152,12 +153,17 @@ def loop():
                         screen2.grid(row=8, column=3, sticky='news')
                         print("Button Pressed")
                         cnt = cnt + 1
-                        #count.set(cnt)
+                        count.set(cnt)
                         print("Count: ", cnt)
+                        #a = True
+                        #if a == True:
+                        #    return
+                        #else:
+                        #    continue
                         #audio_frame = None
                         #val = None
                         #window.after(30000, exit)
-                        return
+                        #break
                        
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         a = True
@@ -183,7 +189,7 @@ def loop():
 
             cap.release()
         cv2.destroyAllWindows()
-    loop()
+    window.after(500, loop)
 
 def lists():
     global c
@@ -256,6 +262,6 @@ Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environ
 
 lists()
 setup()
-loop()
+window.after(500, loop)
 #toggle_fullscreen()
 window.mainloop()
