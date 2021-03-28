@@ -20,8 +20,8 @@ files=[]
 c = 0
 a = True
 cnt = 0
-# count = StringVar()
-# phone = StringVar()
+count = StringVar()
+phone = StringVar()
 # width = window.winfo_screenwidth()-50
 # height = window.winfo_screenheight()-50
 # window.geometry(str(width)+"x"+str(height))
