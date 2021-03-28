@@ -280,5 +280,5 @@ Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environ
 setup()
 #enterScreen1()
 #window.after(500, loop)
-loop()
+window.after(loop)
 window.mainloop()
