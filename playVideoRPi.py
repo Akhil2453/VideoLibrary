@@ -10,6 +10,8 @@ import time
 from ffpyplayer.player import *
 import requests
 
+
+lists()
 #----------------------------container window----------------------------
 window = Tk()
 
@@ -114,13 +116,13 @@ def endprogram():
 def loop():
     window.update()
     window.withdraw()
-    lists()
+    #lists()
     global width
     global height
     global a
     global count
     global cnt
-    global files
+    files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     a = GPIO.input(signal)
     for i in files:
         b = '/home/pi/Desktop/videoLibrary/video/' + i
@@ -133,57 +135,57 @@ def loop():
                 ret, frame = cap.read()
                 audio_frame, val = player.get_frame()
                 
-                if ret == True:
-                    a = GPIO.input(signal)
-                    scale_width = width/frame.shape[1]
-                    scale_height = height/frame.shape[0]
-                    window_width = int(frame.shape[1]*scale_width)
-                    window_height = int(frame.shape[0]*scale_height)
-                    dim = (window_width, window_height)
-                    cv2.resizeWindow('Frame',window_width, window_height)
-                    cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
-                    
-                    if a == False:
-                        a = True
-                        cap.release()
-                        cv2.destroyAllWindows()
-                        window.update()
-                        window.deiconify()
-                        screen2.grid(row=8, column=3, sticky='news')
-                        #raise_frame(screen2)
-                        #window.update()
-                        print("Button Pressed")
-                        cnt = cnt + 1
-                        count.set(cnt)
-                        print("Count: ", cnt)
-                        audio_frame = None
-                        val = None
-                        window.after(30000, exit)
-                        return
-                        
-                    if cv2.waitKey(1) & 0xFF == ord('q'):
-                        a = True
-                        window.update()
-                        window.deiconify()
-                        cap.release()
-                        cv2.destroyAllWindows()
-                        screen2.grid(row=8, column=3, sticky='news')
-                        #time.sleep(0.2)
-                        print("Button Pressed")
-                        cnt = cnt + 1
-                        count.set(cnt)
-                        print("count", cnt)
-                        audio_frame = None
-                        val = None
-                        #enterScreen1()
-                        window.after(30000,exit)
-                        return
+                #if ret == True:
+                a = GPIO.input(signal)
+                scale_width = width/frame.shape[1]
+                scale_height = height/frame.shape[0]
+                window_width = int(frame.shape[1]*scale_width)
+                window_height = int(frame.shape[0]*scale_height)
+                dim = (window_width, window_height)
+                cv2.resizeWindow('Frame',window_width, window_height)
+                cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
+                   
+                if a == False:
+                    a = True
+                    cap.release()
+                    cv2.destroyAllWindows()
+                    window.update()
+                    window.deiconify()
+                    screen2.grid(row=8, column=3, sticky='news')
+                    #raise_frame(screen2)
+                    #window.update()
+                    print("Button Pressed")
+                    cnt = cnt + 1
+                    count.set(cnt)
+                    print("Count: ", cnt)
+                    audio_frame = None
+                    val = None
+                    window.after(30000, exit)
+                    return
+                       
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    a = True
+                    window.update()
+                    window.deiconify()
+                    cap.release()
+                    cv2.destroyAllWindows()
+                    screen2.grid(row=8, column=3, sticky='news')
+                    #time.sleep(0.2)
+                    print("Button Pressed")
+                    cnt = cnt + 1
+                    count.set(cnt)
+                    print("count", cnt)
+                    audio_frame = None
+                    val = None
+                    #enterScreen1()
+                    window.after(30000,exit)
+                    return
 
-                    if val != 'eof' and audio_frame is not None:
-                        img, t = audio_frame
+                if val != 'eof' and audio_frame is not None:
+                    img, t = audio_frame
                         
-                else:
-                    break
+                #else:
+                #    break
 
             cap.release()
         cv2.destroyAllWindows()
