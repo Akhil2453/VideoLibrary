@@ -21,10 +21,10 @@ a = True
 cnt = 0
 count = StringVar()
 phone = StringVar()
-# width = window.winfo_screenwidth()-50
-# height = window.winfo_screenheight()-50
-# window.geometry(str(width)+"x"+str(height))
-# phone.set("")
+width = window.winfo_screenwidth()-50
+height = window.winfo_screenheight()-50
+window.geometry(str(width)+"x"+str(height))
+phone.set("")
 ret = False
 
 #GPIO pins
@@ -35,7 +35,7 @@ def raise_frame(frame):
     frame.tkraise()
 
 #Api
-parameters = {'action':'viewsvideos','MCID':'002000312'}
+parameters = {'action':'viewsvideos','MCID':'002000311'}
 response = requests.get("http://clickcash.in/videoApi/videoApi.php", params=parameters)
 
 #---------------------------------methods-----------------------------------
@@ -123,9 +123,8 @@ def loop():
     global files
     a = GPIO.input(signal)
     for i in files:
-        b = '/home/pi/Desktop/videoLibrary/video/' + i
-        cap = cv2.VideoCapture(b)
-        player = MediaPlayer(b)
+        cap = cv2.VideoCapture(i)
+        player = MediaPlayer(i)
         if (cap.isOpened()==False):
             print("Error opening video file")
         else:
@@ -135,16 +134,13 @@ def loop():
                 
                 if ret == True:
                     a = GPIO.input(signal)
-                    # scale_width = width/frame.shape[1]
-                    # scale_height = height/frame.shape[0]
-                    # window_width = int(frame.shape[1]*scale_width)
-                    # window_height = int(frame.shape[0]*scale_height)
-                    # dim = (window_width, window_height)
-                    # cv2.resizeWindow('Frame',window_width, window_height)
-                    # cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
-                    cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
-                    cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-                    cv2.imshow ('Frame', frame)
+                    scale_width = width/frame.shape[1]
+                    scale_height = height/frame.shape[0]
+                    window_width = int(frame.shape[1]*scale_width)
+                    window_height = int(frame.shape[0]*scale_height)
+                    dim = (window_width, window_height)
+                    cv2.resizeWindow('Frame',window_width, window_height)
+                    cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
                     
                     if a == False:
                         a = True
@@ -204,7 +200,7 @@ def lists():
     for video in videosApi:
         link = video['video']
         videoList.append(link)
-    files = os.listdir("/home/pi/Desktop/videoLibrary/video/")
+    files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     print(files)
     for x in videoList:
         num=num+1
@@ -227,7 +223,7 @@ def lists():
             c=c+1
             print(c)
             videoStream=yt.streams.first()
-            videoStream.download("/home/pi/Desktop/videoLibrary/video/","video"+str(c))
+            videoStream.download("/home/pi/Desktop/videoLibrary/video","video"+str(c))
             #videoStream.download("/home/pi/Desktop/video","video"+str(c))
     
 def enterScreen1():
