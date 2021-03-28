@@ -14,7 +14,7 @@ import requests
 window = Tk()
 window.title("Bottle Crusher")
 window.geometry('1920x1040')
-window.attributes('-fullscreen', True)
+#window.attributes('-fullscreen', True)
 #---------------------------------utils----------------------------------
 videos=[]
 files=[]
