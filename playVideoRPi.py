@@ -35,7 +35,7 @@ def raise_frame(frame):
     frame.tkraise()
 
 #Api
-parameters = {'action':'viewsvideos','MCID':'002000311'}
+parameters = {'action':'viewsvideos','MCID':'002000312'}
 response = requests.get("http://clickcash.in/videoApi/videoApi.php", params=parameters)
 
 #---------------------------------methods-----------------------------------
@@ -140,8 +140,9 @@ def loop():
                     window_width = int(frame.shape[1]*scale_width)
                     window_height = int(frame.shape[0]*scale_height)
                     dim = (window_width, window_height)
-                    cv2.resizeWindow('Frame',window_width, window_height)
-                    cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
+                    #cv2.resizeWindow('Frame',window_width, window_height)
+                    cv2. setWindowProperty ('Frame', cv2. WND_PROP_FULLSCREEN, cv2. WINDOW_FULLSCREEN)
+                    cv2.imshow('Frame', frame) #cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
                    
                     if a == False:
                         a = True
@@ -159,7 +160,7 @@ def loop():
                         audio_frame = None
                         val = None
                         window.after(30000, exit)
-                        return
+                        #return
                        
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         a = True
