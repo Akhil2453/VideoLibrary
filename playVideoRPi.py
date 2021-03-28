@@ -13,6 +13,8 @@ import requests
 #----------------------------container window----------------------------
 window = Tk()
 window.title("Bottle Crusher")
+window.geometry('1920x1040')
+window.attributes('-fullscreen', True)
 #---------------------------------utils----------------------------------
 videos=[]
 files=[]
@@ -21,15 +23,14 @@ a = True
 cnt = 0
 count = StringVar()
 phone = StringVar()
-#width = window.winfo_screenwidth() - 20
-#height = window.winfo_screenheight() - 15
-window.geometry('1920x1040')
 phone.set("")
 ret = False
 dfont = tkFont.Font(size=-6)
 myfont = tkFont.Font(size=32)
 mfont = tkFont.Font(size=20)
 nfont = tkFont.Font(size=20)
+
+
 #GPIO pins
 signal = 18
 
@@ -61,7 +62,6 @@ def number_e():
     count.set(num)
     screen2.grid_forget()
     PageTwo.grid(row=8, column=3, sticky='news')
-    #toggle_fullscreen()
     window.update()
     time.sleep(5)
     PageTwo.grid_forget()
@@ -83,7 +83,6 @@ def exit():
     count.set(num)
     screen2.grid_forget()
     PageTwo.grid(row=8, column=3, sticky='news')
-    #toggle_fullscreen()
     window.update()
     time.sleep(5)
     PageTwo.grid_forget()
@@ -105,30 +104,7 @@ def cancel():
     global cnt
     cnt = 0
     e.delete(0, END)
-    loop()
-
-#toggle fullscreen
-def toggle_fullscreen(event=None):
-    global window
-    global fullscreen
-    fullscreen = not fullscreen
-    window.attributes('-fullscreen', fullscreen)
-    resize()
-
-#go into windowed mode
-def end_fullscreen(event=None):
-    global window
-    global fullscreen
-    fullscreen = False
-    window.attributes('-fullscreen', False)
-    resize()
-
-#resize font based on screen size
-def resize(event=None):
-    global dfont
-    global welcome
-    new_size = -max(12, int((screen2.winfo_height() / 10)))
-    dfont.configure(size=new_size)    
+    loop()   
 
 def setup():
     GPIO.setwarnings(False)
@@ -141,14 +117,12 @@ def endprogram():
 def loop():
     window.update()
     window.withdraw()
-    #lists()
     global width
     global height
     global a
     global count
     global cnt
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
-    #a = GPIO.input(signal)
     for i in files:
         b = '/home/pi/Desktop/videoLibrary/video/' + i
         cap = cv2.VideoCapture(b)
@@ -163,14 +137,6 @@ def loop():
                 
                 if ret == True:
                     a = GPIO.input(signal)
-                    #scale_width = width/frame.shape[1]
-                    #scale_height = height/frame.shape[0]
-                    #window_width = int(frame.shape[1]*scale_width)
-                    #window_height = int(frame.shape[0]*scale_height)
-                    #dim = (window_width, window_height)
-                    #cv2.resizeWindow('Frame',window_width, window_height)
-                    #cv2. setWindowProperty ('Frame', cv2. WND_PROP_FULLSCREEN, cv2. WINDOW_FULLSCREEN)
-                    #cv2.imshow('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
                     cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
                     cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
                     cv2.imshow ('Frame', frame)
@@ -182,16 +148,13 @@ def loop():
                         window.update()
                         window.deiconify()
                         screen2.grid(row=8, column=3, sticky='news')
-                        #toggle_fullscreen()
-                        #raise_frame(screen2)
-                        #window.update()
                         print("Button Pressed")
                         cnt = cnt + 1
                         count.set(cnt)
                         print("Count: ", cnt)
                         audio_frame = None
                         val = None
-                        window.after(30000, exit)
+                        #window.after(30000, exit)
                         return
                        
                     if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -201,15 +164,12 @@ def loop():
                         cap.release()
                         cv2.destroyAllWindows()
                         screen2.grid(row=8, column=3, sticky='news')
-                        #toggle_fullscreen()
-                        #time.sleep(0.2)
                         print("Button Pressed")
                         cnt = cnt + 1
                         count.set(cnt)
                         print("count", cnt)
                         audio_frame = None
                         val = None
-                        #enterScreen1()
                         window.after(30000,exit)
                         return
 
@@ -223,8 +183,6 @@ def loop():
         cv2.destroyAllWindows()
     loop()
 
-        #window.after(500, loop)
-    
 def lists():
     global c
     global collection
@@ -263,7 +221,6 @@ def lists():
 def enterScreen1():
     window.update()
     window.deiconify()
-    #window.after(5000, loop)
 
 #----------------------------Creating screens(Frames)-------------------------
 
