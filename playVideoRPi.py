@@ -127,7 +127,7 @@ def end_fullscreen(event=None):
 def resize(event=None):
     global dfont
     global welcome
-    new_size = -max(12, int((welcome.winfo_height() / 10)))
+    new_size = -max(12, int((screen2.winfo_height() / 10)))
     dfont.configure(size=new_size)    
 
 def setup():
