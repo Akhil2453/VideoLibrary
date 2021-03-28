@@ -142,18 +142,20 @@ def loop():
                     cv2.imshow ('Frame', frame)
                    
                     if a == False:
-                        a = True
+                        #a = True
                         cap.release()
                         cv2.destroyAllWindows()
+                        audio_frame = None
+                        val = None
                         window.update()
-                        window.deiconify()
+                        #window.deiconify()
                         screen2.grid(row=8, column=3, sticky='news')
                         print("Button Pressed")
                         cnt = cnt + 1
                         count.set(cnt)
                         print("Count: ", cnt)
-                        audio_frame = None
-                        val = None
+                        #audio_frame = None
+                        #val = None
                         #window.after(30000, exit)
                         return
                        
