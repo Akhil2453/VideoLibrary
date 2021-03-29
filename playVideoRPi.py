@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 import time
 from ffpyplayer.player import *
 import requests
-
+from datetime import datetime, timedelta
 #----------------------------container window----------------------------
 window = Tk()
 window.title("Bottle Crusher")
@@ -105,7 +105,9 @@ def clear():
 
 def cancel():
     global cnt
-    cnt = 0
+    global count
+    cnt = 1
+    count.set(cnt)
     e.delete(0, END)
     loop()   
 
@@ -153,6 +155,14 @@ def loop():
                     while(a == False) :
                         #a = True
                         time.sleep(0.7)
+                        #--------------------------------
+                        s = datetime.now()
+                        s = str(s)
+                        print(s)
+                        s = s[:-3]+s[-2:]
+                        pat = '%Y-%m-%d %H:%M:%S.%f'
+                        then = datetime.strptime(s, pat)
+                        #-----------------------------
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
@@ -170,7 +180,8 @@ def loop():
                             #window.after(30000, exita)
                         else:
                             time.sleep(0.3)
-                            
+                        if datetime.now(then.tzinfo) - then > timedelta(0, 30):
+                            esita()    
                         a=False
                         #break
                     #window.after(30000, exit)   #return
