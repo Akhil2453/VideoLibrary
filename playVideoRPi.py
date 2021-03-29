@@ -181,9 +181,9 @@ def loop():
 
             cap.release()
         cv2.destroyAllWindows()
-    if (screen2.winfo_ismapped()):{
-        window.after(30000, exita)
-    }
+    #if (screen2.winfo_ismapped()):{
+    #    window.after(30000, exita)
+    #}
     window.after(500, loop)
 
 def lists():
