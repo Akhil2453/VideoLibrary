@@ -15,6 +15,8 @@ window = Tk()
 window.title("Bottle Crusher")
 window.geometry('1920x1040')
 window.attributes('-fullscreen', True)
+width = window.winfo_screenwidth() - 25
+height = window.winfo_screenheight() - 25
 #---------------------------------utils----------------------------------
 videos=[]
 files=[]
@@ -137,13 +139,16 @@ def loop():
                 audio_frame, val = player.get_frame()
                 cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
                 cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-                print(b)
+                #print(b)
                 #frame1 = cv2.resize(frame, (1920, 1040), interpolation=cv2.INTER_AREA)
                 if ret == True:
                     a = GPIO.input(signal)
-                    #cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
-                    #cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-                    cv2.imshow ('Frame', frame)
+                    scale_width = width/frame.shape[1]
+                    scale_height = height/frame.shape[0]
+                    window_width = int(frame.shape[1]*scale_width)
+                    window_height = int(frame.shape[0]*scale_height)
+                    dim = (window_width, window_height)
+                    cv2.imshow ('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
                    
                     while(a == False) :
                         #a = True
