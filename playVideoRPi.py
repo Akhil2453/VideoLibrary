@@ -138,7 +138,7 @@ def loop():
                 cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
                 cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
                 print(b)
-                frame1 = cv2.resize(frame, (1920, 1040), interpolation=cv2.INTER_AREA)
+                #frame1 = cv2.resize(frame, (1920, 1040), interpolation=cv2.INTER_AREA)
                 if ret == True:
                     a = GPIO.input(signal)
                     #cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
