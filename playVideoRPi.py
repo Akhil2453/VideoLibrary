@@ -158,7 +158,7 @@ def loop():
                         #--------------------------------
                         s = datetime.now()
                         s = str(s)
-                        print(s)
+                        #print(s)
                         s = s[:-3]+s[-2:]
                         pat = '%Y-%m-%d %H:%M:%S.%f'
                         then = datetime.strptime(s, pat)
