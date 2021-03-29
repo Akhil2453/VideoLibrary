@@ -83,10 +83,10 @@ def exita():
     cnt = 1
     count.set(cnt)
     screen2.grid_forget()
-    # PageTwo.grid(row=8, column=3, sticky='news')
-    # window.update()
-    # time.sleep(5)
-    # PageTwo.grid_forget()
+    PageTwo.grid(row=8, column=3, sticky='news')
+    window.update()
+    time.sleep(5)
+    PageTwo.grid_forget()
     loop()
     window.update()
 
@@ -137,8 +137,9 @@ def loop():
                 audio_frame, val = player.get_frame()
                 cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
                 cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+                print(frame)
                 frame1 = cv2.resize(frame, (1920, 1040), interpolation=cv2.INTER_AREA)
-                
+                print(frame1)
                 if ret == True:
                     a = GPIO.input(signal)
                     #cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
