@@ -137,12 +137,13 @@ def loop():
                 audio_frame, val = player.get_frame()
                 cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
                 cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+                frame1 = cv2.resize(frame, (1920, 1040), interpolation=cv2.INTER_AREA)
                 
                 if ret == True:
                     a = GPIO.input(signal)
                     #cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
                     #cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-                    cv2.imshow ('Frame', frame)
+                    cv2.imshow ('Frame', frame1)
                    
                     while(a == False) :
                         #a = True
