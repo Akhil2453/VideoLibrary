@@ -106,6 +106,7 @@ def clear():
 def cancel():
     global cnt
     global count
+    exita()
     cnt = 1
     count.set(cnt)
     e.delete(0, END)
