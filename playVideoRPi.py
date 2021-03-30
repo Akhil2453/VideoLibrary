@@ -89,8 +89,8 @@ def exita():
     print(r)
     num=""
     phone.set(num)
-    cnt = 0
-    count.set(cnt)
+    #cnt = 0
+    #count.set(cnt)
     screen2.grid_forget()
     PageTwo.grid(row=8, column=3, sticky='news')
     window.update()
