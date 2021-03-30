@@ -218,12 +218,6 @@ def lists():
             print(c)
             videoStream=yt.streams.first()
             videoStream.download("/home/pi/Desktop/videoLibrary/video","video"+str(c))
-    
-def enterScreen1():
-    window.update()
-    window.deiconify()
-
-
 
 #----------------------------Creating screens(Frames)-------------------------
 
