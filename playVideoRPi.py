@@ -156,6 +156,7 @@ def loop():
                     while(a == False) :
                         #a = True
                         time.sleep(0.7)
+                        a = GPIO.input(signal)
                         if a==False:
                             player = None
                             cap.release()
@@ -165,12 +166,13 @@ def loop():
                             window.update()
                             window.deiconify()
                             screen2.grid(row=8, column=3, sticky='news')
-                            a = GPIO.input(signal)
+                            #a = GPIO.input(signal)
                         #if a==False:
                             print("Button Pressed")
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
+                            a=True
                             #window.after(30000, exita)
                         #else:
                         #    time.sleep(0.3)
