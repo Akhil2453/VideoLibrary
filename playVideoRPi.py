@@ -172,8 +172,7 @@ def loop():
                             print("Count: ", cnt)
                             #window.after(30000, exita)
                         else:
-                            #time.sleep(0.3)
-                            window.after(30000, exita)
+                            time.sleep(0.3)
                         a=False
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         return
