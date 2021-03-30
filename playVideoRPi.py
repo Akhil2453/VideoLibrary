@@ -184,8 +184,8 @@ def loop():
                             count.set(cnt)
                             print("Count: ", cnt)
                             timer.start()
-                        timer.cancel()
-                        timer=threading.Timer(30, cancel)                            
+                        #timer.cancel()
+                        #timer=threading.Timer(30, cancel)                            
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
