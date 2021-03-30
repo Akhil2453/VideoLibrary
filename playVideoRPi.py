@@ -137,6 +137,7 @@ def loop():
     global count
     global cnt
     global timer
+    a = True
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     for i in files:
         b = '/home/pi/Desktop/videoLibrary/video/' + i
@@ -165,10 +166,7 @@ def loop():
                     main=threading.main_thread()
 
                     while(a == False) :
-                        #a = True
                         time.sleep(0.7)
-                        #timer.start()
-                        #timer.join()
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
@@ -178,7 +176,6 @@ def loop():
                         window.deiconify()
                         screen2.grid(row=8, column=3, sticky='news')
                         a = GPIO.input(signal)
-                        
                         if a==False:
                             if(timer.is_alive()):
                                 #timer._stop()
@@ -197,16 +194,9 @@ def loop():
                                 print("Count: ", cnt)
                                 timer.start()
                                 print("after the thread has started")
-                            #timer.join()    
-                                #return
-                            
-                            #window.after(30000, exita)
+                                a = True
                         else:
                             time.sleep(0.3)
-                        #if(not timer.is_alive()):
-                           # print("Active threads: "+str(threading.active_count()))
-                        #else:
-                            #continue
                         a=False
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
