@@ -169,6 +169,7 @@ def loop():
                     while(a == False) :
                         time.sleep(0.7)
                         if(cnt == 1):
+                            print("Count: ", cnt)
                             timer.start()
                         player = None
                         cap.release()
