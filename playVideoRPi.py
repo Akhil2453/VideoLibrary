@@ -10,6 +10,7 @@ import time
 from ffpyplayer.player import *
 import requests
 from datetime import datetime, timedelta
+import threading
 #----------------------------container window----------------------------
 window = Tk()
 window.title("Bottle Crusher")
@@ -32,7 +33,6 @@ myfont = tkFont.Font(size=32)
 mfont = tkFont.Font(size=20)
 nfont = tkFont.Font(size=20)
 count.set(cnt)
-
 
 #GPIO pins
 signal = 18
@@ -106,7 +106,7 @@ def clear():
 def cancel():
     global cnt
     global count
-    exita()
+    #exita()
     cnt = 1
     count.set(cnt)
     e.delete(0, END)
@@ -152,10 +152,14 @@ def loop():
                     window_height = int(frame.shape[0]*scale_height)
                     dim = (window_width, window_height)
                     cv2.imshow ('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
-                   
+                    timer=threading.Timer(30, exita)
+                    main=threading.main_thread()
+
                     while(a == False) :
                         #a = True
                         time.sleep(0.7)
+                        #timer.start()
+                        #timer.join()
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
@@ -165,18 +169,40 @@ def loop():
                         window.deiconify()
                         screen2.grid(row=8, column=3, sticky='news')
                         a = GPIO.input(signal)
+                        
                         if a==False:
-                            print("Button Pressed")
-                            cnt = cnt + 1
-                            count.set(cnt)
-                            print("Count: ", cnt)
+                            if(timer.is_alive()):
+                                #timer._stop()
+                                print("Button Pressed")
+                                cnt = cnt + 1
+                                count.set(cnt)
+                                print("Count: ", cnt)
+                                print("inside timer.stop")
+                                continue
+                            else:
+                                print("inside else")
+                                #continue
+                                print("Button Pressed")
+                                cnt = cnt + 1
+                                count.set(cnt)
+                                print("Count: ", cnt)
+                                timer.start()
+                                print("after the thread has started")
+                            #timer.join()    
+                                #return
+                            
                             #window.after(30000, exita)
                         else:
                             time.sleep(0.3)
+                        #if(not timer.is_alive()):
+                           # print("Active threads: "+str(threading.active_count()))
+                        #else:
+                            #continue
                         a=False
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         return
+                        
                     if val != 'eof' and audio_frame is not None:
                         img, t = audio_frame
                 else:
@@ -255,5 +281,6 @@ Label(PageTwo, text="Thank You\n\nfor your contribution\n\nin making our environ
 lists()
 setup()
 window.after(500, loop)
+
 #toggle_fullscreen()
 window.mainloop()
