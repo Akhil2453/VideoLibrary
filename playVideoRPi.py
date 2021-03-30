@@ -138,6 +138,7 @@ def loop():
     global cnt
     global timer
     a = True
+    timer.cancel()
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     for i in files:
         b = '/home/pi/Desktop/videoLibrary/video/' + i
@@ -167,6 +168,7 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
+                        timer.start()
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
