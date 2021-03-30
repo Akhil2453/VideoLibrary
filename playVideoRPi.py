@@ -99,7 +99,7 @@ def exita():
     loop()
     window.update()
 
-timer=threading.Timer(30, exita)
+#timer=threading.Timer(30, exita)
 
 def enterNum(digit):
     phone.set(phone.get()+str(digit))
@@ -114,11 +114,17 @@ def clear():
 def cancel():
     global cnt
     global count
+    pushCnt = str(cnt)
+    print(pushCnt)
+    para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000312', 'BTNO': pushCnt}
+    r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
     #exita()
     cnt = 0
     count.set(cnt)
     e.delete(0, END)
-    loop()   
+    loop()
+
+timer=threading.Timer(30, cancel)   
 
 def setup():
     GPIO.setwarnings(False)
@@ -170,12 +176,12 @@ def loop():
                     window_height = int(frame.shape[0]*scale_height)
                     dim = (window_width, window_height)
                     cv2.imshow ('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
-                    timer=threading.Timer(30, exita)
+                    timer=threading.Timer(30, cancel)
                     main=threading.main_thread()
 
                     while(a == False) :
                         time.sleep(0.7)
-                        if(cnt == 0:
+                        if(cnt == 0):
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
