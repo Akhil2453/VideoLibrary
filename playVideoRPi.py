@@ -34,6 +34,7 @@ mfont = tkFont.Font(size=20)
 nfont = tkFont.Font(size=20)
 count.set(cnt)
 
+
 #GPIO pins
 signal = 18
 
@@ -51,6 +52,8 @@ def number_e():
     global count
     global cnt
     global ret
+    global timer
+    timer.cancel()
     num = phone.get()
     phone.set(num)
     pushCnt = str(cnt)
@@ -75,6 +78,8 @@ def exita():
     global phone
     global count
     global cnt
+    global timer
+    timer.cancel()
     pushCnt = str(cnt)
     print(pushCnt)
     para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000312', 'BTNO': pushCnt}
@@ -92,6 +97,7 @@ def exita():
     loop()
     window.update()
 
+timer=threading.Timer(30, exita)
 
 def enterNum(digit):
     phone.set(phone.get()+str(digit))
@@ -128,6 +134,7 @@ def loop():
     global a
     global count
     global cnt
+    global timer
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     for i in files:
         b = '/home/pi/Desktop/videoLibrary/video/' + i
