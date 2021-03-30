@@ -139,8 +139,12 @@ def loop():
     global timer
     a = True
     timer.cancel()
+    if(cnt >= 1):
+        a = True
+        cnt=0
+        count.set(cnt)
     #cnt = 0
-    #count.set(cnt)
+    count.set(cnt)
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     for i in files:
         b = '/home/pi/Desktop/videoLibrary/video/' + i
@@ -203,8 +207,8 @@ def loop():
                                 timer.start()
                                 print("after the thread has started")
                                 a = True
-                        else:
-                            time.sleep(0.3)
+                        #else:
+                            #time.sleep(0.3)
                         a=False
                         
                     if cv2.waitKey(1) & 0xFF == ord('q'):
