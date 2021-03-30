@@ -161,13 +161,11 @@ def loop():
                         cv2.destroyAllWindows()
                         audio_frame = None
                         val = None
-                        cnt = 1
-                        count.set(cnt)
                         window.update()
                         window.deiconify()
                         screen2.grid(row=8, column=3, sticky='news')
                         a = GPIO.input(signal)
-                        if a==False and cnt>=1:
+                        if a==False:
                             print("Button Pressed")
                             cnt = cnt + 1
                             count.set(cnt)
