@@ -181,12 +181,18 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
-                        timer.cancel()
+                        #timer.cancel()
                         if(cnt == 0):
-                            cnt = cnt + 1
-                            count.set(cnt)
-                            print("Count: ", cnt)
-                            timer.start()
+                            if(timer.is_alive()):
+                                timer.cancel
+                                cnt = cnt + 1
+                                count.set(cnt)
+                                print("Count: ", cnt)
+                            else:
+                                cnt = cnt + 1
+                                count.set(cnt)
+                                print("Count: ", cnt)
+                                timer.start()
                         timer=threading.Timer(30, cancel)                            
                         player = None
                         cap.release()
