@@ -23,7 +23,7 @@ videos=[]
 files=[]
 c = 0
 a = True
-cnt = 1
+cnt = 0
 count = StringVar()
 phone = StringVar()
 phone.set("")
@@ -64,7 +64,7 @@ def number_e():
     print(r)
     num=""
     phone.set(num)
-    cnt = 1
+    cnt = 0
     count.set(cnt)
     screen2.grid_forget()
     PageTwo.grid(row=8, column=3, sticky='news')
@@ -89,7 +89,7 @@ def exita():
     print(r)
     num=""
     phone.set(num)
-    cnt = 1
+    cnt = 0
     count.set(cnt)
     screen2.grid_forget()
     PageTwo.grid(row=8, column=3, sticky='news')
@@ -115,7 +115,7 @@ def cancel():
     global cnt
     global count
     #exita()
-    cnt = 1
+    cnt = 0
     count.set(cnt)
     e.delete(0, END)
     loop()   
@@ -168,9 +168,12 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
-                        if(cnt == 1):
+                        if(cnt == 0):
+                            cnt = cnt + 1
+                            count.set(cnt)
                             print("Count: ", cnt)
                             timer.start()
+                            
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
