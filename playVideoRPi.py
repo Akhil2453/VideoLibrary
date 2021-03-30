@@ -140,10 +140,10 @@ def loop():
     a = True
     timer.cancel()
     if(cnt >= 1):
-        loop()
-        #a = True
-        #cnt=0
-        #count.set(cnt)
+        #loop()
+        a = True
+        cnt=0
+        count.set(cnt)
     #cnt = 0
     count.set(cnt)
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
@@ -175,7 +175,7 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
-                        if(cnt == 0):
+                        if(cnt == 0:
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
