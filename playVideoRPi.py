@@ -78,7 +78,9 @@ def exita():
     global phone
     global count
     global cnt
+    global a
     global timer
+    a = True
     timer.cancel()
     pushCnt = str(cnt)
     print(pushCnt)
