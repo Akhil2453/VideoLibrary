@@ -155,14 +155,6 @@ def loop():
                     while(a == False) :
                         #a = True
                         time.sleep(0.7)
-                        #--------------------------------
-                        s = datetime.now()
-                        s = str(s)
-                        #print(s)
-                        s = s[:-3]+s[-2:]
-                        pat = '%Y-%m-%d %H:%M:%S.%f'
-                        then = datetime.strptime(s, pat)
-                        #-----------------------------
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
@@ -179,27 +171,17 @@ def loop():
                             print("Count: ", cnt)
                             #window.after(30000, exita)
                         else:
-                            time.sleep(0.3)
-                        if datetime.now(then.tzinfo) - then > timedelta(0, 30):
-                            esita()    
+                            #time.sleep(0.3)
+                            window.after(30000, exita)
                         a=False
-                        #break
-                    #window.after(30000, exit)   #return
-                       
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         return
-
                     if val != 'eof' and audio_frame is not None:
                         img, t = audio_frame
-                        
                 else:
                     break
-
             cap.release()
         cv2.destroyAllWindows()
-    #if (screen2.winfo_ismapped()):{
-    #    window.after(30000, exita)
-    #}
     window.after(500, loop)
 
 def lists():
