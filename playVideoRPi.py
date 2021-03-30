@@ -74,30 +74,30 @@ def number_e():
     loop()
     window.update()
 
-def exita():
-    global phone
-    global count
-    global cnt
-    global a
-    global timer
-    a = True
-    timer.cancel()
-    pushCnt = str(cnt)
-    print(pushCnt)
-    para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000312', 'BTNO': pushCnt}
-    r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
-    print(r)
-    num=""
-    phone.set(num)
-    #cnt = 0
-    #count.set(cnt)
-    screen2.grid_forget()
-    PageTwo.grid(row=8, column=3, sticky='news')
-    window.update()
-    time.sleep(5)
-    PageTwo.grid_forget()
-    loop()
-    window.update()
+# def exita():
+#     global phone
+#     global count
+#     global cnt
+#     global a
+#     global timer
+#     a = True
+#     timer.cancel()
+#     pushCnt = str(cnt)
+#     print(pushCnt)
+#     para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000312', 'BTNO': pushCnt}
+#     r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
+#     print(r)
+#     num=""
+#     phone.set(num)
+#     #cnt = 0
+#     #count.set(cnt)
+#     screen2.grid_forget()
+#     PageTwo.grid(row=8, column=3, sticky='news')
+#     window.update()
+#     time.sleep(5)
+#     PageTwo.grid_forget()
+#     loop()
+#     window.update()
 
 #timer=threading.Timer(30, exita)
 
@@ -181,12 +181,12 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
+                        timer.cancel()
                         if(cnt == 0):
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
                             timer.start()
-                        timer.cancel()
                         timer=threading.Timer(30, cancel)                            
                         player = None
                         cap.release()
