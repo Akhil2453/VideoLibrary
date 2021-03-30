@@ -168,7 +168,8 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
-                        timer.start()
+                        if(cnt == 1):
+                            timer.start()
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
