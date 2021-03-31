@@ -119,7 +119,7 @@ def cancel():
     para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000312', 'BTNO': pushCnt}
     r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
     #exita()
-    cnt = 0
+    cnt = 1
     count.set(cnt)
     e.delete(0, END)
     loop()
