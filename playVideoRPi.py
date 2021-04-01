@@ -74,33 +74,6 @@ def number_e():
     loop()
     window.update()
 
-def exita():
-    global phone
-    global count
-    global cnt
-    global a
-    global timer
-    a = True
-    timer.cancel()
-    pushCnt = str(cnt)
-    print(pushCnt)
-    para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000312', 'BTNO': pushCnt}
-    r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
-    print(r)
-    num=""
-    phone.set(num)
-    #cnt = 0
-    #count.set(cnt)
-    screen2.grid_forget()
-    PageTwo.grid(row=8, column=3, sticky='news')
-    window.update()
-    time.sleep(5)
-    PageTwo.grid_forget()
-    loop()
-    window.update()
-
-#timer=threading.Timer(30, exita)
-
 def enterNum(digit):
     phone.set(phone.get()+str(digit))
     e.icursor("end")
@@ -152,6 +125,7 @@ def loop():
         count.set(cnt)
     #cnt = 0
     count.set(cnt)
+    timer=threading.Timer(30, cancel)
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     for i in files:
         b = '/home/pi/Desktop/videoLibrary/video/' + i
@@ -166,8 +140,7 @@ def loop():
                 audio_frame, val = player.get_frame()
                 cv2.namedWindow ('Frame', cv2.WINDOW_NORMAL)
                 cv2.setWindowProperty ('Frame', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-                #print(b)
-                #frame1 = cv2.resize(frame, (1920, 1040), interpolation=cv2.INTER_AREA)
+
                 if ret == True:
                     a = GPIO.input(signal)
                     scale_width = width/frame.shape[1]
@@ -176,16 +149,14 @@ def loop():
                     window_height = int(frame.shape[0]*scale_height)
                     dim = (window_width, window_height)
                     cv2.imshow ('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
-                    timer=threading.Timer(30, cancel)
+                    
                     while(a == False) :
                         time.sleep(0.7)
                         if(cnt == 0):
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
-                            timer.start()
-                        #timer.cancel()
-                        #timer=threading.Timer(30, cancel)                            
+                            timer.start()                            
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
@@ -196,7 +167,7 @@ def loop():
                         screen2.grid(row=8, column=3, sticky='news')
                         a = GPIO.input(signal)
                         if a==False:
-                            if(timer.is_alive()):
+                            if(timer.is_alive() and cnt>=1):
                                 #timer._stop()
                                 print("Button Pressed")
                                 cnt = cnt + 1
