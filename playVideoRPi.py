@@ -152,7 +152,7 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
-                        if((cnt == 0) and (!timer.is_alive()):
+                        if((cnt == 0) and (not timer.is_alive()):
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
