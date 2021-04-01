@@ -92,7 +92,7 @@ def cancel():
     para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000312', 'BTNO': pushCnt}
     r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
     #exita()
-    cnt = 1
+    cnt = 0
     count.set(cnt)
     e.delete(0, END)
     loop()
@@ -152,7 +152,7 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
-                        if(cnt == 0):
+                        if((cnt == 0) and (!timer.is_alive()):
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
