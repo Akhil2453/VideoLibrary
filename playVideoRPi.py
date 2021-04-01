@@ -152,11 +152,14 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
-                        if((cnt == 0) and (not timer.is_alive()):
-                            cnt = cnt + 1
-                            count.set(cnt)
-                            print("Count: ", cnt)
-                            timer.start()
+                        if cnt == 0:
+                            if timer.is_alive():
+                                continue
+                            else:
+                                cnt = cnt + 1
+                                count.set(cnt)
+                                print("Count: ", cnt)
+                                timer.start()
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
