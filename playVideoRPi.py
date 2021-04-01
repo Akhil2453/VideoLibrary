@@ -149,14 +149,14 @@ def loop():
                     window_height = int(frame.shape[0]*scale_height)
                     dim = (window_width, window_height)
                     cv2.imshow ('Frame', cv2.resize(frame, dim, interpolation=cv2.INTER_AREA))
-                    
+
                     while(a == False) :
                         time.sleep(0.7)
                         if(cnt == 0):
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
-                            timer.start()                            
+                            timer.start()
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
@@ -188,10 +188,8 @@ def loop():
                         else:
                             time.sleep(0.3)
                         a=False
-                        
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         return
-                        
                     if val != 'eof' and audio_frame is not None:
                         img, t = audio_frame
                 else:
