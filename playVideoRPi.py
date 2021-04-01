@@ -91,6 +91,7 @@ def cancel():
     print(pushCnt)
     para = {'action': 'saveUserData', 'MOB': '9999999999', 'MCID': '002000312', 'BTNO': pushCnt}
     r = requests.post("http://clickcash.in/apisave/apiDataSavever2.php", data=para)
+    print(r)
     #exita()
     cnt = 0
     count.set(cnt)
@@ -153,13 +154,10 @@ def loop():
                     while(a == False) :
                         time.sleep(0.7)
                         if cnt == 0:
-                            if timer.is_alive():
-                                continue
-                            else:
-                                cnt = cnt + 1
-                                count.set(cnt)
-                                print("Count: ", cnt)
-                                timer.start()
+                            cnt = cnt + 1
+                            count.set(cnt)
+                            print("Count: ", cnt)
+                            timer.start()
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
