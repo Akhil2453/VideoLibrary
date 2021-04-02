@@ -51,7 +51,6 @@ def countdown():
         #print(timer, end="\r")
         time.sleep(1)
         t -= 1
-    cancel()
 
 #Api
 parameters = {'action':'viewsvideos','MCID':'002000312'}
@@ -129,13 +128,11 @@ def loop():
     global cnt
     global timer
     a = True
-    #timer.cancel()
     if(cnt >= 1):
         #loop()
         a = True
         cnt=0
         count.set(cnt)
-    #cnt = 0
     count.set(cnt)
     timer=multiprocessing.Process(target=countdown)
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
@@ -189,10 +186,14 @@ def loop():
                                 print("Count: ", cnt)
                                 print("Process is still running")
                                 continue
-                            else:
+                            elif not timer.is_alive():
                                 print("process has stopped")
+                                cancel()
                         else:
                             time.sleep(0.3)
+
+                        if not timer.is_alive():
+                            cancel()
                         a=False
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         return
