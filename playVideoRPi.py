@@ -163,7 +163,6 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
-                        
                         if cnt == 0:
                             cnt = cnt + 1
                             count.set(cnt)
