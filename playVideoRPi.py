@@ -128,7 +128,7 @@ def loop():
     global cnt
     global timer
     a = True
-    timer.cancel()
+    #timer.cancel()
     if(cnt >= 1):
         #loop()
         a = True
