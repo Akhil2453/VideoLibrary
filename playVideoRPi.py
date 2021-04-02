@@ -157,7 +157,7 @@ def loop():
                             if timer.is_alive():
                                 timer.cancel()
                                 timer=threading.Timer(30, cancel)
-                                continue
+                                break
                             else:
                                 cnt = cnt + 1
                                 count.set(cnt)
