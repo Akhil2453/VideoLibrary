@@ -163,12 +163,14 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
-                        timer.start()
+                        
                         if cnt == 0:
                             cnt = cnt + 1
                             count.set(cnt)
                             print("Count: ", cnt)
                             print("Inside first if statement")
+                            timer.start()
+                            print("processs has started")
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
@@ -185,9 +187,10 @@ def loop():
                                 cnt = cnt + 1
                                 count.set(cnt)
                                 print("Count: ", cnt)
-                                print("inside timer.stop")
+                                print("Process is still running")
                                 continue
                             else:
+                                print("process has stopped")
                                 # print("inside else")
                                 # #continue
                                 # print("Button Pressed")
