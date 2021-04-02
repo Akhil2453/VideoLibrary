@@ -51,6 +51,8 @@ def countdown():
         #print(timer, end="\r")
         time.sleep(1)
         t -= 1
+    timer.join()
+    cancel()
 
 #Api
 parameters = {'action':'viewsvideos','MCID':'002000312'}
