@@ -11,6 +11,7 @@ from ffpyplayer.player import *
 import requests
 from datetime import datetime, timedelta
 import threading
+import multiprocessing
 #----------------------------container window----------------------------
 window = Tk()
 window.title("Bottle Crusher")
@@ -42,6 +43,15 @@ signal = 18
 def raise_frame(frame):
     frame.tkraise()
 
+def countdown():
+    t = 30
+    while t:
+        mins, secs = divmod(t, 60)
+        timer = '{:02d}:{:02d}'.format(mins, secs)
+        #print(timer, end="\r")
+        time.sleep(1)
+        t -= 1
+
 #Api
 parameters = {'action':'viewsvideos','MCID':'002000312'}
 response = requests.get("http://clickcash.in/videoApi/videoApi.php", params=parameters)
@@ -53,7 +63,7 @@ def number_e():
     global cnt
     global ret
     global timer
-    timer.cancel()
+    timer.terminate()
     num = phone.get()
     phone.set(num)
     pushCnt = str(cnt)
@@ -98,7 +108,7 @@ def cancel():
     e.delete(0, END)
     loop()
 
-timer=threading.Timer(30, cancel)   
+timer=multiprocessing.Process(target=countdown)   
 
 def setup():
     GPIO.setwarnings(False)
@@ -126,7 +136,7 @@ def loop():
         count.set(cnt)
     #cnt = 0
     count.set(cnt)
-    timer=threading.Timer(30, cancel)
+    timer=multiprocessing.Process(target=countdown)
     files = os.listdir("/home/pi/Desktop/videoLibrary/video")
     for i in files:
         b = '/home/pi/Desktop/videoLibrary/video/' + i
@@ -153,18 +163,12 @@ def loop():
 
                     while(a == False) :
                         time.sleep(0.7)
+                        timer.start()
                         if cnt == 0:
-                            if timer.is_alive():
-                                timer.cancel()
-                                timer=threading.Timer(30, cancel)
-                                break
-                            else:
-                                cnt = cnt + 1
-                                count.set(cnt)
-                                print("Count: ", cnt)
-                                print("Inside first if statement")
-                                timer.start()
-                                continue
+                            cnt = cnt + 1
+                            count.set(cnt)
+                            print("Count: ", cnt)
+                            print("Inside first if statement")
                         player = None
                         cap.release()
                         cv2.destroyAllWindows()
@@ -184,15 +188,16 @@ def loop():
                                 print("inside timer.stop")
                                 continue
                             else:
-                                print("inside else")
-                                #continue
-                                print("Button Pressed")
-                                cnt = cnt + 1
-                                count.set(cnt)
-                                print("Count: ", cnt)
-                                timer.start()
-                                print("after the thread has started")
-                                a = True
+                                # print("inside else")
+                                # #continue
+                                # print("Button Pressed")
+                                # cnt = cnt + 1
+                                # count.set(cnt)
+                                # print("Count: ", cnt)
+                                # timer.start()
+                                # print("after the thread has started")
+                                # a = True
+                                cancel()
                         else:
                             time.sleep(0.3)
                         a=False
