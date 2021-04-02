@@ -51,6 +51,7 @@ def countdown():
         #print(timer, end="\r")
         time.sleep(1)
         t -= 1
+    cancel()
 
 #Api
 parameters = {'action':'viewsvideos','MCID':'002000312'}
@@ -190,16 +191,6 @@ def loop():
                                 continue
                             else:
                                 print("process has stopped")
-                                # print("inside else")
-                                # #continue
-                                # print("Button Pressed")
-                                # cnt = cnt + 1
-                                # count.set(cnt)
-                                # print("Count: ", cnt)
-                                # timer.start()
-                                # print("after the thread has started")
-                                # a = True
-                                cancel()
                         else:
                             time.sleep(0.3)
                         a=False
